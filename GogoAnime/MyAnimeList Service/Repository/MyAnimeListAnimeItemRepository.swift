@@ -17,14 +17,22 @@ class MyAnimeListAnimeItemRepository: AnimeItemRepository {
         
         let endpoint = MyAnimeListEndpoint.topAnimeList(type: type, subtype: subtype, page: page)
         
-        let (data, _) = try await URLSession.shared.data(for: endpoint.request, delegate: nil)
+        let (data, response) = try await URLSession.shared.data(for: endpoint.request, delegate: nil)
         
-        // TODO: - check response status code
+        guard let response = response as? HTTPURLResponse else {
+            throw APIError.notHTTPURLResponse
+        }
         
-        let decoder = JSONDecoder()
-        let responseModel = try decoder.decode(ResponseModel.self, from: data)
-        
-        return responseModel.top
+        switch response.statusCode {
+        case 200...399:
+            let decoder = JSONDecoder()
+            let responseModel = try decoder.decode(ResponseModel.self, from: data)
+            
+            return responseModel.top
+            
+        default:
+            throw APIError.statusCode(response.statusCode)
+        }
     }
 }
 
