@@ -72,7 +72,9 @@ final class AnimeItemListViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        viewModel.reload()
+        if viewModel.animeItems == nil {
+            viewModel.reload()
+        }
     }
     
     // MARK: - Private Methods
