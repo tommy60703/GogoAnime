@@ -1,5 +1,5 @@
 //
-//  MyAnimeListAnimeItemUsseCase.swift
+//  AppAnimeItemUsseCase.swift
 //  GogoAnime
 //
 //  Created by Tommy Lin on 2022/3/6.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-class MyAnimeListAnimeItemUseCase: AnimeItemUseCase {
+class AppAnimeItemUseCase: AnimeItemUseCase {
     
     var animeItemRepo: AnimeItemRepository
     var favoriteItemRepo: FavoriteAnimeItemRepository

@@ -12,7 +12,7 @@
 		6522E2BD27D4816900E4DB27 /* AnimeItemUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6522E2BC27D4816900E4DB27 /* AnimeItemUseCase.swift */; };
 		6522E2C227D485F700E4DB27 /* MyAnimeListAnimeItemRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6522E2C127D485F700E4DB27 /* MyAnimeListAnimeItemRepository.swift */; };
 		6522E2C427D4865900E4DB27 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6522E2C327D4865900E4DB27 /* Endpoint.swift */; };
-		6522E2C827D4901600E4DB27 /* MyAnimeListAnimeItemUsseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6522E2C727D4901600E4DB27 /* MyAnimeListAnimeItemUsseCase.swift */; };
+		6522E2C827D4901600E4DB27 /* AppAnimeItemUsseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6522E2C727D4901600E4DB27 /* AppAnimeItemUsseCase.swift */; };
 		6522E2CB27D4966E00E4DB27 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6522E2CA27D4966E00E4DB27 /* APIError.swift */; };
 		6522E2CD27D498CD00E4DB27 /* AnimeItemListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6522E2CC27D498CD00E4DB27 /* AnimeItemListViewController.swift */; };
 		6522E2D027D4AC1700E4DB27 /* AnimeItemListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6522E2CF27D4AC1700E4DB27 /* AnimeItemListViewModel.swift */; };
@@ -36,7 +36,7 @@
 		6522E2BC27D4816900E4DB27 /* AnimeItemUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimeItemUseCase.swift; sourceTree = "<group>"; };
 		6522E2C127D485F700E4DB27 /* MyAnimeListAnimeItemRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAnimeListAnimeItemRepository.swift; sourceTree = "<group>"; };
 		6522E2C327D4865900E4DB27 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
-		6522E2C727D4901600E4DB27 /* MyAnimeListAnimeItemUsseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAnimeListAnimeItemUsseCase.swift; sourceTree = "<group>"; };
+		6522E2C727D4901600E4DB27 /* AppAnimeItemUsseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAnimeItemUsseCase.swift; sourceTree = "<group>"; };
 		6522E2CA27D4966E00E4DB27 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
 		6522E2CC27D498CD00E4DB27 /* AnimeItemListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimeItemListViewController.swift; sourceTree = "<group>"; };
 		6522E2CF27D4AC1700E4DB27 /* AnimeItemListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimeItemListViewModel.swift; sourceTree = "<group>"; };
@@ -107,7 +107,6 @@
 			children = (
 				6522E2C327D4865900E4DB27 /* Endpoint.swift */,
 				6522E2CA27D4966E00E4DB27 /* APIError.swift */,
-				6522E2C927D4901C00E4DB27 /* UseCases */,
 				6522E2C627D48FE700E4DB27 /* Repository */,
 			);
 			path = "MyAnimeList Service";
@@ -124,7 +123,7 @@
 		6522E2C927D4901C00E4DB27 /* UseCases */ = {
 			isa = PBXGroup;
 			children = (
-				6522E2C727D4901600E4DB27 /* MyAnimeListAnimeItemUsseCase.swift */,
+				6522E2C727D4901600E4DB27 /* AppAnimeItemUsseCase.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -186,6 +185,7 @@
 				65D412A427D4773500918850 /* AppDelegate.swift */,
 				65D412A627D4773500918850 /* SceneDelegate.swift */,
 				65D412A827D4773500918850 /* ViewController.swift */,
+				6522E2C927D4901C00E4DB27 /* UseCases */,
 				6522E2CE27D49DC400E4DB27 /* Anime Item List */,
 				6522E2BF27D4859D00E4DB27 /* Domain */,
 				6522E2C027D485B900E4DB27 /* MyAnimeList Service */,
@@ -278,7 +278,7 @@
 			files = (
 				6522E2BD27D4816900E4DB27 /* AnimeItemUseCase.swift in Sources */,
 				6522E2D627D4BB1500E4DB27 /* UIView+GogoAnime.swift in Sources */,
-				6522E2C827D4901600E4DB27 /* MyAnimeListAnimeItemUsseCase.swift in Sources */,
+				6522E2C827D4901600E4DB27 /* AppAnimeItemUsseCase.swift in Sources */,
 				6522E2C227D485F700E4DB27 /* MyAnimeListAnimeItemRepository.swift in Sources */,
 				6522E2CB27D4966E00E4DB27 /* APIError.swift in Sources */,
 				6522E2D027D4AC1700E4DB27 /* AnimeItemListViewModel.swift in Sources */,

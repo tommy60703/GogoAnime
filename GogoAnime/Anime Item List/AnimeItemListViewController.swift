@@ -17,7 +17,7 @@ final class AnimeItemListViewController: UIViewController {
     private let viewModel: AnimeItemListViewModel = {
         let animeItemRepo = MyAnimeListAnimeItemRepository()
         let favoriteRepo = LocalFavoriteAnimeItemRepository()
-        let useCase: AnimeItemUseCase = MyAnimeListAnimeItemUseCase(
+        let useCase: AnimeItemUseCase = AppAnimeItemUseCase(
             animeItemRepo: animeItemRepo,
             favoriteItemRepo: favoriteRepo
         )
