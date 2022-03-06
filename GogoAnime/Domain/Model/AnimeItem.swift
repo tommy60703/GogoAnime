@@ -20,7 +20,8 @@ struct AnimeItem: Hashable, Codable {
     var endDate: String?
     var type: String
     
-    var isFavorite: Bool = false
+    /// Not an API field
+    private var isFavoriteOrNil: Bool?
     
     enum CodingKeys: String, CodingKey {
         case id = "mal_id"
@@ -31,6 +32,7 @@ struct AnimeItem: Hashable, Codable {
         case startDate = "start_date"
         case endDate = "end_date"
         case type
+        case isFavoriteOrNil
     }
     
     var url: URL? {
@@ -45,6 +47,15 @@ struct AnimeItem: Hashable, Codable {
             return URL(string: imageURLString)
         }
         return nil
+    }
+    
+    var isFavorite: Bool {
+        set {
+            isFavoriteOrNil = newValue
+        }
+        get {
+            isFavoriteOrNil ?? false
+        }
     }
 }
 

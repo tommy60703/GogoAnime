@@ -16,17 +16,14 @@ class LocalFavoriteAnimeItemRepository: FavoriteAnimeItemRepository {
         guard let data = UserDefaults.standard.data(forKey: Self.faviriteAnimeItemsKey) else {
             return []
         }
+        
         let decoder = JSONDecoder()
         
-        guard let animeItems = try? decoder.decode([AnimeItem].self, from: data) else {
-            return []
+        if let animeItems = try? decoder.decode([AnimeItem].self, from: data) {
+            return animeItems
         }
         
-        return animeItems.map {
-            var item = $0
-            item.isFavorite = true
-            return item
-        }
+        return []
     }
     
     func addToFavorites(_ animeItem: AnimeItem) async throws -> AnimeItem {
