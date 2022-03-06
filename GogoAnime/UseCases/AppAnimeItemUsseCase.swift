@@ -17,7 +17,11 @@ class AppAnimeItemUseCase: AnimeItemUseCase {
         self.favoriteItemRepo = favoriteItemRepo
     }
     
-    func avilableSubtypes(for type: AnimeItemType) -> [AnimeItemSubtype] {
+    func availableTypes() -> [AnimeItemType] {
+        return [.anime, .manga]
+    }
+    
+    func availableSubtypes(for type: AnimeItemType) -> [AnimeItemSubtype] {
         switch type {
         case .anime:
             return [.airing, .upcoming, .tv, .movie, .ova, .special, .bypopularity, .favorite]

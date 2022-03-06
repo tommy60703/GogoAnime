@@ -10,7 +10,8 @@ import Foundation
 protocol AnimeItemUseCase {
     var animeItemRepo: AnimeItemRepository { get }
     
-    func avilableSubtypes(for type: AnimeItemType) -> [AnimeItemSubtype]
+    func availableTypes() -> [AnimeItemType]
+    func availableSubtypes(for type: AnimeItemType) -> [AnimeItemSubtype]
     func animeItems(type: AnimeItemType, subtype: AnimeItemSubtype?, page: Int) async throws -> [AnimeItem]
     
     func addToFavorites(_ animeItem: AnimeItem) async throws -> AnimeItem
