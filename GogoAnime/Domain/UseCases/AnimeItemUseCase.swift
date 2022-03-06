@@ -11,5 +11,5 @@ protocol AnimeItemUseCase {
     var animeItemRepo: AnimeItemRepository { get }
     
     func avilableSubtypes(for type: AnimeItemType) -> [AnimeItemSubtype]
-    func animeItems(type: AnimeItemType, subtype: AnimeItemSubtype, page: Int) async -> [AnimeItem]
+    func animeItems(type: AnimeItemType, subtype: AnimeItemSubtype?, page: Int) async throws -> [AnimeItem]
 }

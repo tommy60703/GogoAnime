@@ -8,5 +8,5 @@
 import Foundation
 
 protocol AnimeItemRepository {
-    func animeItems(type: AnimeItemType, subtype: AnimeItemSubtype?, page: Int) async -> [AnimeItem]
+    func animeItems(type: AnimeItemType, subtype: AnimeItemSubtype?, page: Int) async throws -> [AnimeItem]
 }
