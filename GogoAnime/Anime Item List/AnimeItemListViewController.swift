@@ -6,6 +6,7 @@
 //
 
 import Combine
+import SafariServices
 import UIKit
 
 final class AnimeItemListViewController: UIViewController {
@@ -133,6 +134,17 @@ extension AnimeItemListViewController: UICollectionViewDelegate {
         if identifier == lastIdentifier {
             viewModel.loadMore()
         }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        guard let url = viewModel.animeItems?[indexPath.item].url else {
+            return
+        }
+        
+        // TODO: use coordinator
+        let safari = SFSafariViewController(url: url)
+        present(safari, animated: true, completion: nil)
     }
 }
 
