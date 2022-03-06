@@ -67,6 +67,16 @@
 			path = UseCases;
 			sourceTree = "<group>";
 		};
+		6522E2BF27D4859D00E4DB27 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				6522E2BE27D482DC00E4DB27 /* UseCases */,
+				6522E2B927D47E5300E4DB27 /* Repository */,
+				6522E2B627D4789A00E4DB27 /* Model */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
 		65D4129827D4773500918850 = {
 			isa = PBXGroup;
 			children = (
@@ -89,9 +99,7 @@
 				65D412A427D4773500918850 /* AppDelegate.swift */,
 				65D412A627D4773500918850 /* SceneDelegate.swift */,
 				65D412A827D4773500918850 /* ViewController.swift */,
-				6522E2BE27D482DC00E4DB27 /* UseCases */,
-				6522E2B927D47E5300E4DB27 /* Repository */,
-				6522E2B627D4789A00E4DB27 /* Model */,
+				6522E2BF27D4859D00E4DB27 /* Domain */,
 				65D412AA27D4773500918850 /* Main.storyboard */,
 				65D412AD27D4773600918850 /* Assets.xcassets */,
 				65D412AF27D4773600918850 /* LaunchScreen.storyboard */,
