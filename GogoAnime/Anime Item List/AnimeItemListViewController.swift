@@ -5,6 +5,7 @@
 //  Created by Tommy Lin on 2022/3/6.
 //
 
+import Combine
 import UIKit
 
 final class AnimeItemListViewController: UIViewController {
@@ -12,7 +13,12 @@ final class AnimeItemListViewController: UIViewController {
     // MARK: - Data
     
     // TODO: - DI and ViewModel
-    let useCase: AnimeItemUseCase = MyAnimeListAnimeItemUseCase(animeItemRepo: MyAnimeListAnimeItemRepository())
+    private let viewModel: AnimeItemListViewModel = {
+        let useCase: AnimeItemUseCase = MyAnimeListAnimeItemUseCase(animeItemRepo: MyAnimeListAnimeItemRepository())
+        return AnimeItemListViewModel(useCase: useCase, type: .anime, subtype: .airing)
+    }()
+    
+    private var bag = [AnyCancellable]()
     
     // MARK: - UI
     
@@ -21,6 +27,10 @@ final class AnimeItemListViewController: UIViewController {
         let layout = UICollectionViewCompositionalLayout.list(using: config)
         return UICollectionView(frame: .zero, collectionViewLayout: layout)
     }()
+    
+    private lazy var refreshControl = UIRefreshControl(frame: .zero, primaryAction: UIAction { _ in
+        self.viewModel.reload()
+    })
     
     private enum Section: Hashable {
         case topAnime
@@ -36,6 +46,9 @@ final class AnimeItemListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        collectionView.refreshControl = refreshControl
+        collectionView.delegate = self
+        
         view.addSubview(collectionView)
         
         collectionView.translatesAutoresizingMaskIntoConstraints = false
@@ -46,28 +59,41 @@ final class AnimeItemListViewController: UIViewController {
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
+        
+        bindViewModel()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        Task {
-            do {
-                let items = try await useCase.animeItems(type: .anime, subtype: .airing, page: 1)
-                
-                var snapshot = Snapshot()
-                snapshot.appendSections([.topAnime])
-                snapshot.appendItems(items.map(\.id))
-                
-                await dataSource.apply(snapshot)
-                
-            } catch {
-                debugPrint(error)
-            }
-        }
+        viewModel.reload()
     }
     
     // MARK: - Private Methods
+    
+    private func bindViewModel() {
+        viewModel.$reloadState
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] state in
+                if !state.isLoading {
+                    self?.refreshControl.endRefreshing()
+                }
+            }
+            .store(in: &bag)
+        
+        viewModel.$animeItems
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] animeItems in
+                if let animeItems = animeItems {
+                    var snapshot = Snapshot()
+                    snapshot.appendSections([.topAnime])
+                    snapshot.appendItems(animeItems.map(\.id), toSection: .topAnime)
+
+                    self?.dataSource.apply(snapshot)
+                }
+            }
+            .store(in: &bag)
+    }
     
     private func makeDataSource() -> DataSource {
         // TODO: - set up with anime item 
@@ -79,6 +105,23 @@ final class AnimeItemListViewController: UIViewController {
         
         return DataSource(collectionView: collectionView) { collectionView, indexPath, item in
             collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: item)
+        }
+    }
+}
+
+extension AnimeItemListViewController: UICollectionViewDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        
+        let itemIdentifiers = dataSource.snapshot().itemIdentifiers(inSection: .topAnime)
+        guard let lastIdentifier = itemIdentifiers.last else {
+            return
+        }
+        
+        let identifier = dataSource.snapshot().itemIdentifiers(inSection: .topAnime)[indexPath.item]
+        
+        if identifier == lastIdentifier {
+            viewModel.loadMore()
         }
     }
 }
