@@ -96,10 +96,20 @@ final class AnimeItemListViewController: UIViewController {
     }
     
     private func makeDataSource() -> DataSource {
-        // TODO: - set up with anime item 
-        let cellRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, AnimeItem.ID> { cell, indexPath, identifier in
-            var content = cell.defaultContentConfiguration()
-            content.text = "Anime #\(identifier)"
+         
+        let cellRegistration = UICollectionView.CellRegistration<UICollectionViewCell, AnimeItem.ID> { [unowned self] cell, indexPath, identifier in
+            
+            guard let item = self.viewModel.animeItems?[indexPath.item] else {
+                return
+            }
+            
+            let content = AnimeItemConfiguration(
+                imageURL: item.imageURL,
+                title: item.title,
+                rank: item.rank,
+                dateText: item.dateText,
+                type: item.type
+            )
             cell.contentConfiguration = content
         }
         
@@ -123,5 +133,12 @@ extension AnimeItemListViewController: UICollectionViewDelegate {
         if identifier == lastIdentifier {
             viewModel.loadMore()
         }
+    }
+}
+
+extension AnimeItem {
+    
+    var dateText: String {
+        [startDate, "-", endDate].compactMap { $0 }.joined(separator: " ")
     }
 }
