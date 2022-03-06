@@ -15,7 +15,12 @@ final class AnimeItemListViewController: UIViewController {
     
     // TODO: - DI and ViewModel
     private let viewModel: AnimeItemListViewModel = {
-        let useCase: AnimeItemUseCase = MyAnimeListAnimeItemUseCase(animeItemRepo: MyAnimeListAnimeItemRepository())
+        let animeItemRepo = MyAnimeListAnimeItemRepository()
+        let favoriteRepo = LocalFavoriteAnimeItemRepository()
+        let useCase: AnimeItemUseCase = MyAnimeListAnimeItemUseCase(
+            animeItemRepo: animeItemRepo,
+            favoriteItemRepo: favoriteRepo
+        )
         return AnimeItemListViewModel(useCase: useCase, type: .anime, subtype: .airing)
     }()
     
@@ -46,7 +51,7 @@ final class AnimeItemListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+                
         collectionView.refreshControl = refreshControl
         collectionView.delegate = self
         
@@ -94,6 +99,16 @@ final class AnimeItemListViewController: UIViewController {
                 }
             }
             .store(in: &bag)
+        
+        viewModel.animeItemDidUpdate
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] animeItemID in
+                if var snapshot = self?.dataSource.snapshot() {
+                    snapshot.reconfigureItems([animeItemID])
+                    self?.dataSource.apply(snapshot)
+                }
+            }
+            .store(in: &bag)
     }
     
     private func makeDataSource() -> DataSource {
@@ -112,13 +127,8 @@ final class AnimeItemListViewController: UIViewController {
                 type: item.type,
                 isFavorite: item.isFavorite
             )
-            content.addToFavoriteHandler = { [unowned viewModel, unowned dataSource] isFavorite in
-                
-                isFavorite ? viewModel.addToFavorites(item.id) : viewModel.removeFromFavorites(item.id)
-                
-                var snapshot = dataSource.snapshot()
-                snapshot.reconfigureItems([item.id])
-                dataSource.apply(snapshot)
+            content.addToFavoriteHandler = { [unowned viewModel] isFavorite in
+                isFavorite ? viewModel.addToFavorites(item) : viewModel.removeFromFavorites(item)
             }
             cell.contentConfiguration = content
         }

@@ -26,6 +26,8 @@ final class AnimeItemListViewModel {
     @Published private(set) var animeItems: [AnimeItem]?
     @Published private(set) var currentPage: Int = 1
     
+    let animeItemDidUpdate = PassthroughSubject<AnimeItem.ID, Never>()
+    
     private var loadMoreTask: Task<(), Never>?
     
     private let useCase: AnimeItemUseCase
@@ -38,37 +40,37 @@ final class AnimeItemListViewModel {
         self.subtype = subtype
     }
     
-    func addToFavorites(_ id: AnimeItem.ID) {
-        // TODO: update favorite list repo
-        guard var animeItems = animeItems else {
-            return
-        }
-
-        let index = animeItems.firstIndex { $0.id == id }
-        
-        if let index = index {
-            var item = animeItems[index]
-            item.isFavorite = true
-            animeItems[index] = item
-            
-            self.animeItems = animeItems
+    func addToFavorites(_ animeItem: AnimeItem) {
+        Task {
+            do {
+                let updated = try await useCase.addToFavorites(animeItem)
+                
+                let index = animeItems?.firstIndex { $0.id == animeItem.id }
+                
+                if let index = index {
+                    animeItems?[index] = updated
+                    animeItemDidUpdate.send(animeItem.id)
+                }
+            } catch {
+                debugPrint(error)
+            }
         }
     }
     
-    func removeFromFavorites(_ id: AnimeItem.ID) {
-        // TODO: update favorite list repo
-        guard var animeItems = animeItems else {
-            return
-        }
-        
-        let index = animeItems.firstIndex { $0.id == id }
-        
-        if let index = index {
-            var item = animeItems[index]
-            item.isFavorite = false
-            animeItems[index] = item
-            
-            self.animeItems = animeItems
+    func removeFromFavorites(_ animeItem: AnimeItem) {
+        Task {
+            do {
+                let updated = try await useCase.removeFromFavorites(animeItem)
+                
+                let index = animeItems?.firstIndex { $0.id == animeItem.id }
+                
+                if let index = index {
+                    animeItems?[index] = updated
+                    animeItemDidUpdate.send(animeItem.id)
+                }
+            } catch {
+                debugPrint(error)
+            }
         }
     }
     
