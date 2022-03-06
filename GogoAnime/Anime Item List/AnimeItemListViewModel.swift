@@ -38,6 +38,40 @@ final class AnimeItemListViewModel {
         self.subtype = subtype
     }
     
+    func addToFavorites(_ id: AnimeItem.ID) {
+        // TODO: update favorite list repo
+        guard var animeItems = animeItems else {
+            return
+        }
+
+        let index = animeItems.firstIndex { $0.id == id }
+        
+        if let index = index {
+            var item = animeItems[index]
+            item.isFavorite = true
+            animeItems[index] = item
+            
+            self.animeItems = animeItems
+        }
+    }
+    
+    func removeFromFavorites(_ id: AnimeItem.ID) {
+        // TODO: update favorite list repo
+        guard var animeItems = animeItems else {
+            return
+        }
+        
+        let index = animeItems.firstIndex { $0.id == id }
+        
+        if let index = index {
+            var item = animeItems[index]
+            item.isFavorite = false
+            animeItems[index] = item
+            
+            self.animeItems = animeItems
+        }
+    }
+    
     func reload() {
         guard !reloadState.isLoading else {
             return

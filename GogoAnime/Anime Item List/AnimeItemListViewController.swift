@@ -104,13 +104,22 @@ final class AnimeItemListViewController: UIViewController {
                 return
             }
             
-            let content = AnimeItemConfiguration(
+            var content = AnimeItemConfiguration(
                 imageURL: item.imageURL,
                 title: item.title,
                 rank: item.rank,
                 dateText: item.dateText,
-                type: item.type
+                type: item.type,
+                isFavorite: item.isFavorite
             )
+            content.addToFavoriteHandler = { [unowned viewModel, unowned dataSource] isFavorite in
+                
+                isFavorite ? viewModel.addToFavorites(item.id) : viewModel.removeFromFavorites(item.id)
+                
+                var snapshot = dataSource.snapshot()
+                snapshot.reconfigureItems([item.id])
+                dataSource.apply(snapshot)
+            }
             cell.contentConfiguration = content
         }
         

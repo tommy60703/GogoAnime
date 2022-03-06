@@ -21,6 +21,9 @@ final class AnimeItemView: UIView, UIContentView {
     private let rankLabel = UILabel()
     private let typeLabel = UILabel()
     private let dateLabel = UILabel()
+    private let addToFavoriteButton = UIButton(type: .custom)
+    
+    private var addToFavoriteHandler: AnimeItemConfiguration.AddToFavoriteHandler?
     
     private let rankLayoutGuide = UILayoutGuide()
     
@@ -49,6 +52,16 @@ final class AnimeItemView: UIView, UIContentView {
         dateLabel.font = .preferredFont(forTextStyle: .caption1)
         dateLabel.textColor = .secondaryLabel
         
+        addToFavoriteButton.tintColor = .systemPink
+        addToFavoriteButton.setImage(UIImage(systemName: "heart"), for: .normal)
+        addToFavoriteButton.setImage(UIImage(systemName: "heart.fill"), for: .selected)
+        addToFavoriteButton.setImage(UIImage(systemName: "heart.fill"), for: [.selected, .highlighted])
+        
+        addToFavoriteButton.addAction(UIAction { [unowned self] _ in
+            let isFavorite = !addToFavoriteButton.isSelected
+            addToFavoriteHandler?(isFavorite)
+        }, for: .primaryActionTriggered)
+        
         let textStack = UIStackView(arrangedSubviews: [titleLabel, typeLabel, dateLabel])
         textStack.axis = .vertical
         textStack.alignment = .leading
@@ -60,7 +73,7 @@ final class AnimeItemView: UIView, UIContentView {
         stack.spacing = 8
         
         addLayoutGuide(rankLayoutGuide)
-        addAutoLayoutSubviews([rankLabel, stack])
+        addAutoLayoutSubviews([rankLabel, stack, addToFavoriteButton])
         
         NSLayoutConstraint.activate([
             rankLayoutGuide.leadingAnchor.constraint(equalTo: layoutMarginsGuide.leadingAnchor),
@@ -71,9 +84,12 @@ final class AnimeItemView: UIView, UIContentView {
             rankLabel.trailingAnchor.constraint(equalTo: rankLayoutGuide.trailingAnchor),
             
             stack.leadingAnchor.constraint(equalToSystemSpacingAfter: rankLayoutGuide.trailingAnchor, multiplier: 1.0),
-            stack.trailingAnchor.constraint(equalTo: layoutMarginsGuide.trailingAnchor),
             stack.topAnchor.constraint(equalTo: layoutMarginsGuide.topAnchor),
             stack.bottomAnchor.constraint(equalTo: layoutMarginsGuide.bottomAnchor).priority(.required - 1),
+            
+            addToFavoriteButton.centerYAnchor.constraint(equalTo: layoutMarginsGuide.centerYAnchor),
+            addToFavoriteButton.leadingAnchor.constraint(equalToSystemSpacingAfter: stack.trailingAnchor, multiplier: 1.0),
+            addToFavoriteButton.trailingAnchor.constraint(equalTo: layoutMarginsGuide.trailingAnchor),
             
             imageView.widthAnchor.constraint(equalToConstant: 60),
             imageView.heightAnchor.constraint(equalTo: imageView.widthAnchor, multiplier: 320/225),
@@ -95,6 +111,9 @@ final class AnimeItemView: UIView, UIContentView {
         titleLabel.text = configuration.title
         dateLabel.text = configuration.dateText
         typeLabel.text = configuration.type
+        addToFavoriteButton.isSelected = configuration.isFavorite
+        
+        addToFavoriteHandler = configuration.addToFavoriteHandler
     }
 }
 
@@ -105,6 +124,10 @@ struct AnimeItemConfiguration: UIContentConfiguration {
     var rank: Int
     var dateText: String
     var type: String
+    var isFavorite: Bool
+    
+    typealias AddToFavoriteHandler = (_ favorite: Bool) -> Void
+    var addToFavoriteHandler: AddToFavoriteHandler?
     
     func makeContentView() -> UIView & UIContentView {
         AnimeItemView(self)

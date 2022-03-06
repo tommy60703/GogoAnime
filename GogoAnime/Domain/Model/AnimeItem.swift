@@ -20,6 +20,8 @@ struct AnimeItem: Hashable, Codable {
     var endDate: String?
     var type: String
     
+    var isFavorite: Bool = false
+    
     enum CodingKeys: String, CodingKey {
         case id = "mal_id"
         case urlString = "url"
