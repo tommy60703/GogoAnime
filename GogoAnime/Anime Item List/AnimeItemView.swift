@@ -5,6 +5,7 @@
 //  Created by Tommy Lin on 2022/3/6.
 //
 
+import Kingfisher
 import UIKit
 
 final class AnimeItemView: UIView, UIContentView {
@@ -89,6 +90,7 @@ final class AnimeItemView: UIView, UIContentView {
             return
         }
 
+        imageView.kf.setImage(with: configuration.imageURL)
         rankLabel.text = "\(configuration.rank)"
         titleLabel.text = configuration.title
         dateLabel.text = configuration.dateText

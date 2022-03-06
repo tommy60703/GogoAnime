@@ -19,6 +19,7 @@
 		6522E2D427D4B95000E4DB27 /* AnimeItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6522E2D327D4B95000E4DB27 /* AnimeItemView.swift */; };
 		6522E2D627D4BB1500E4DB27 /* UIView+GogoAnime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6522E2D527D4BB1500E4DB27 /* UIView+GogoAnime.swift */; };
 		6522E2D927D4C14F00E4DB27 /* NSLayoutConstraint+GogoAnime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6522E2D827D4C14F00E4DB27 /* NSLayoutConstraint+GogoAnime.swift */; };
+		6522E2DC27D4C55300E4DB27 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 6522E2DB27D4C55300E4DB27 /* Kingfisher */; };
 		65D412A527D4773500918850 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D412A427D4773500918850 /* AppDelegate.swift */; };
 		65D412A727D4773500918850 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D412A627D4773500918850 /* SceneDelegate.swift */; };
 		65D412A927D4773500918850 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D412A827D4773500918850 /* ViewController.swift */; };
@@ -55,6 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6522E2DC27D4C55300E4DB27 /* Kingfisher in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -191,6 +193,9 @@
 			dependencies = (
 			);
 			name = GogoAnime;
+			packageProductDependencies = (
+				6522E2DB27D4C55300E4DB27 /* Kingfisher */,
+			);
 			productName = GogoAnime;
 			productReference = 65D412A127D4773500918850 /* GogoAnime.app */;
 			productType = "com.apple.product-type.application";
@@ -219,6 +224,9 @@
 				Base,
 			);
 			mainGroup = 65D4129827D4773500918850;
+			packageReferences = (
+				6522E2DA27D4C55300E4DB27 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+			);
 			productRefGroup = 65D412A227D4773500918850 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -480,6 +488,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		6522E2DA27D4C55300E4DB27 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@github.com:onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 7.2.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		6522E2DB27D4C55300E4DB27 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6522E2DA27D4C55300E4DB27 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 65D4129927D4773500918850 /* Project object */;
 }
