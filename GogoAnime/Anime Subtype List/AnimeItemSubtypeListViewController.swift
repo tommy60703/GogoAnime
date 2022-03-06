@@ -1,5 +1,5 @@
 //
-//  AnimeItemTypeListViewController.swift
+//  AnimeItemSubtypeListViewController.swift
 //  GogoAnime
 //
 //  Created by Tommy Lin on 2022/3/6.
@@ -8,19 +8,11 @@
 import Combine
 import UIKit
 
-final class AnimeItemTypeListViewController: UIViewController {
+final class AnimeItemSubtypeListViewController: UIViewController {
     
     // MARK: - Data
     // TODO: - DI and ViewModel
-    private let viewModel: AnimeItemTypeListViewModel = {
-        let animeItemRepo = MyAnimeListAnimeItemRepository()
-        let favoriteRepo = LocalFavoriteAnimeItemRepository()
-        let useCase: AnimeItemUseCase = AppAnimeItemUseCase(
-            animeItemRepo: animeItemRepo,
-            favoriteItemRepo: favoriteRepo
-        )
-        return AnimeItemTypeListViewModel(useCase: useCase)
-    }()
+    private let viewModel: AnimeItemSubtypeListViewModel
     
     private var bag = [AnyCancellable]()
     
@@ -33,15 +25,29 @@ final class AnimeItemTypeListViewController: UIViewController {
     }()
     
     private enum Section: Hashable {
-        case animeItemType
+        case animeItemSubtype
     }
     
-    private typealias DataSource = UICollectionViewDiffableDataSource<Section, AnimeItemType>
-    private typealias Snapshot = NSDiffableDataSourceSnapshot<Section, AnimeItemType>
+    private enum Identifier: Hashable {
+        case all
+        case subtype(AnimeItemSubtype)
+    }
+    
+    private typealias DataSource = UICollectionViewDiffableDataSource<Section, Identifier>
+    private typealias Snapshot = NSDiffableDataSourceSnapshot<Section, Identifier>
     
     private lazy var dataSource = makeDataSource()
     
     // MARK: - Lifecycle
+    
+    init(viewModel: AnimeItemSubtypeListViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,12 +63,14 @@ final class AnimeItemTypeListViewController: UIViewController {
             collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
         
-        viewModel.$animeItemTypes
+        viewModel.$animeItemSubtypes
             .receive(on: DispatchQueue.main)
-            .sink { [unowned self] animeTypes in
+            .sink { [unowned self] subtypes in
+                let items = [Identifier.all] + subtypes.map { .subtype($0) }
+                
                 var snapshot = Snapshot()
-                snapshot.appendSections([.animeItemType])
-                snapshot.appendItems(animeTypes, toSection: .animeItemType)
+                snapshot.appendSections([.animeItemSubtype])
+                snapshot.appendItems(items, toSection: .animeItemSubtype)
                 dataSource.apply(snapshot)
             }
             .store(in: &bag)
@@ -72,9 +80,14 @@ final class AnimeItemTypeListViewController: UIViewController {
     
     private func makeDataSource() -> DataSource {
         
-        let cellRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, AnimeItemType> { cell, indexPath, identifier in
+        let cellRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, Identifier> { cell, indexPath, identifier in
             var content = cell.defaultContentConfiguration()
-            content.text = identifier.rawValue.capitalized
+            switch identifier {
+            case .all:
+                content.text = "All"
+            case .subtype(let subtype):
+                content.text = subtype.rawValue.capitalized
+            }
             cell.contentConfiguration = content
         }
         
@@ -84,11 +97,12 @@ final class AnimeItemTypeListViewController: UIViewController {
     }
 }
 
-extension AnimeItemTypeListViewController: UICollectionViewDelegate {
+extension AnimeItemSubtypeListViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if let type = dataSource.itemIdentifier(for: indexPath) {
-         
+        let type = viewModel.type
+        if let identifier = dataSource.itemIdentifier(for: indexPath) {
+            
             // TODO: use coordinator
             let animeItemRepo = MyAnimeListAnimeItemRepository()
             let favoriteRepo = LocalFavoriteAnimeItemRepository()
@@ -96,11 +110,16 @@ extension AnimeItemTypeListViewController: UICollectionViewDelegate {
                 animeItemRepo: animeItemRepo,
                 favoriteItemRepo: favoriteRepo
             )
-            let subtypeListViewModel = AnimeItemSubtypeListViewModel(
-                useCase: useCase,
-                type: type
-            )
-            let viewController = AnimeItemSubtypeListViewController(viewModel: subtypeListViewModel)
+            
+            let subtype: AnimeItemSubtype? = {
+                switch identifier {
+                case .all: return nil
+                case .subtype(let subtype): return subtype
+                }
+            }()
+            
+            let animeItemViewModel = AnimeItemListViewModel(useCase: useCase, type: type, subtype: subtype)
+            let viewController = AnimeItemListViewController(viewModel: animeItemViewModel)
             navigationController?.pushViewController(viewController, animated: true)
         }
     }

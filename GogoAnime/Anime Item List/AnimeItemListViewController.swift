@@ -14,15 +14,7 @@ final class AnimeItemListViewController: UIViewController {
     // MARK: - Data
     
     // TODO: - DI and ViewModel
-    private let viewModel: AnimeItemListViewModel = {
-        let animeItemRepo = MyAnimeListAnimeItemRepository()
-        let favoriteRepo = LocalFavoriteAnimeItemRepository()
-        let useCase: AnimeItemUseCase = AppAnimeItemUseCase(
-            animeItemRepo: animeItemRepo,
-            favoriteItemRepo: favoriteRepo
-        )
-        return AnimeItemListViewModel(useCase: useCase, type: .anime, subtype: .airing)
-    }()
+    private let viewModel: AnimeItemListViewModel
     
     private var bag = [AnyCancellable]()
     
@@ -48,6 +40,15 @@ final class AnimeItemListViewController: UIViewController {
     private lazy var dataSource = makeDataSource()
     
     // MARK: - Lifecycle
+    
+    init(viewModel: AnimeItemListViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
