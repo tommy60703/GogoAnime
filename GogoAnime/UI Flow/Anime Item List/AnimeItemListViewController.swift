@@ -13,7 +13,6 @@ final class AnimeItemListViewController: UIViewController {
     
     // MARK: - Data
     
-    // TODO: - DI and ViewModel
     private let viewModel: AnimeItemListViewModel
     
     private var bag = [AnyCancellable]()

@@ -11,16 +11,12 @@ import UIKit
 final class AnimeItemTypeListViewController: UIViewController {
     
     // MARK: - Data
-    // TODO: - DI and ViewModel
-    private let viewModel: AnimeItemTypeListViewModel = {
-        let animeItemRepo = MyAnimeListAnimeItemRepository()
-        let favoriteRepo = LocalFavoriteAnimeItemRepository()
-        let useCase: AnimeItemUseCase = AppAnimeItemUseCase(
-            animeItemRepo: animeItemRepo,
-            favoriteItemRepo: favoriteRepo
-        )
-        return AnimeItemTypeListViewModel(useCase: useCase)
-    }()
+    
+    typealias DidSelectTypeHandler = (AnimeItemTypeListViewController, AnimeItemType) -> Void
+    
+    var didSelectTypeHandler: DidSelectTypeHandler?
+
+    private let viewModel: AnimeItemTypeListViewModel
     
     private var bag = [AnyCancellable]()
     
@@ -42,6 +38,15 @@ final class AnimeItemTypeListViewController: UIViewController {
     private lazy var dataSource = makeDataSource()
     
     // MARK: - Lifecycle
+    
+    init(viewModel: AnimeItemTypeListViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -88,20 +93,7 @@ extension AnimeItemTypeListViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let type = dataSource.itemIdentifier(for: indexPath) {
-         
-            // TODO: use coordinator
-            let animeItemRepo = MyAnimeListAnimeItemRepository()
-            let favoriteRepo = LocalFavoriteAnimeItemRepository()
-            let useCase = AppAnimeItemUseCase(
-                animeItemRepo: animeItemRepo,
-                favoriteItemRepo: favoriteRepo
-            )
-            let subtypeListViewModel = AnimeItemSubtypeListViewModel(
-                useCase: useCase,
-                type: type
-            )
-            let viewController = AnimeItemSubtypeListViewController(viewModel: subtypeListViewModel)
-            navigationController?.pushViewController(viewController, animated: true)
+            didSelectTypeHandler?(self, type)
         }
     }
 }

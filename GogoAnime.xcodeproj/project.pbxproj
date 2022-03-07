@@ -26,6 +26,7 @@
 		6522E2EF27D4FD8900E4DB27 /* AnimeItemTypeListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6522E2EE27D4FD8900E4DB27 /* AnimeItemTypeListViewModel.swift */; };
 		6522E2F127D4FEEC00E4DB27 /* AnimeItemSubtypeListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6522E2F027D4FEEC00E4DB27 /* AnimeItemSubtypeListViewController.swift */; };
 		6522E2F427D4FF2D00E4DB27 /* AnimeItemSubtypeListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6522E2F327D4FF2D00E4DB27 /* AnimeItemSubtypeListViewModel.swift */; };
+		6522E30627D63D0E00E4DB27 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6522E30527D63D0E00E4DB27 /* Coordinator.swift */; };
 		65D412A527D4773500918850 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D412A427D4773500918850 /* AppDelegate.swift */; };
 		65D412A727D4773500918850 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D412A627D4773500918850 /* SceneDelegate.swift */; };
 		65D412A927D4773500918850 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D412A827D4773500918850 /* ViewController.swift */; };
@@ -53,6 +54,7 @@
 		6522E2EE27D4FD8900E4DB27 /* AnimeItemTypeListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimeItemTypeListViewModel.swift; sourceTree = "<group>"; };
 		6522E2F027D4FEEC00E4DB27 /* AnimeItemSubtypeListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimeItemSubtypeListViewController.swift; sourceTree = "<group>"; };
 		6522E2F327D4FF2D00E4DB27 /* AnimeItemSubtypeListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimeItemSubtypeListViewModel.swift; sourceTree = "<group>"; };
+		6522E30527D63D0E00E4DB27 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		65D412A127D4773500918850 /* GogoAnime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GogoAnime.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		65D412A427D4773500918850 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		65D412A627D4773500918850 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -189,6 +191,17 @@
 			path = "Anime Subtype List";
 			sourceTree = "<group>";
 		};
+		6522E30427D63CF900E4DB27 /* UI Flow */ = {
+			isa = PBXGroup;
+			children = (
+				6522E30527D63D0E00E4DB27 /* Coordinator.swift */,
+				6522E2E727D4FA5000E4DB27 /* Anime Type List */,
+				6522E2F227D4FF2200E4DB27 /* Anime Subtype List */,
+				6522E2CE27D49DC400E4DB27 /* Anime Item List */,
+			);
+			path = "UI Flow";
+			sourceTree = "<group>";
+		};
 		65D4129827D4773500918850 = {
 			isa = PBXGroup;
 			children = (
@@ -211,10 +224,8 @@
 				65D412A427D4773500918850 /* AppDelegate.swift */,
 				65D412A627D4773500918850 /* SceneDelegate.swift */,
 				65D412A827D4773500918850 /* ViewController.swift */,
+				6522E30427D63CF900E4DB27 /* UI Flow */,
 				6522E2C927D4901C00E4DB27 /* UseCases */,
-				6522E2E727D4FA5000E4DB27 /* Anime Type List */,
-				6522E2F227D4FF2200E4DB27 /* Anime Subtype List */,
-				6522E2CE27D49DC400E4DB27 /* Anime Item List */,
 				6522E2BF27D4859D00E4DB27 /* Domain */,
 				6522E2C027D485B900E4DB27 /* MyAnimeList Service */,
 				6522E2E127D4DA3300E4DB27 /* Local Service */,
@@ -310,6 +321,7 @@
 				6522E2EB27D4FA7200E4DB27 /* AnimeItemTypeListViewController.swift in Sources */,
 				6522E2C227D485F700E4DB27 /* MyAnimeListAnimeItemRepository.swift in Sources */,
 				6522E2CB27D4966E00E4DB27 /* APIError.swift in Sources */,
+				6522E30627D63D0E00E4DB27 /* Coordinator.swift in Sources */,
 				6522E2EF27D4FD8900E4DB27 /* AnimeItemTypeListViewModel.swift in Sources */,
 				6522E2D027D4AC1700E4DB27 /* AnimeItemListViewModel.swift in Sources */,
 				6522E2D427D4B95000E4DB27 /* AnimeItemView.swift in Sources */,
@@ -476,9 +488,9 @@
 				DEVELOPMENT_TEAM = XR36VWF86K;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GogoAnime/Info.plist;
+				INFOPLIST_KEY_NSMainNibFile = Main;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -504,9 +516,9 @@
 				DEVELOPMENT_TEAM = XR36VWF86K;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GogoAnime/Info.plist;
+				INFOPLIST_KEY_NSMainNibFile = Main;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (

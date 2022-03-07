@@ -11,7 +11,11 @@ import UIKit
 final class AnimeItemSubtypeListViewController: UIViewController {
     
     // MARK: - Data
-    // TODO: - DI and ViewModel
+
+    typealias DidSelectTypeHandler = (AnimeItemSubtypeListViewController, AnimeItemType, AnimeItemSubtype?) -> Void
+    
+    var didSelectTypeHandler: DidSelectTypeHandler?
+    
     private let viewModel: AnimeItemSubtypeListViewModel
     
     private var bag = [AnyCancellable]()
@@ -103,14 +107,6 @@ extension AnimeItemSubtypeListViewController: UICollectionViewDelegate {
         let type = viewModel.type
         if let identifier = dataSource.itemIdentifier(for: indexPath) {
             
-            // TODO: use coordinator
-            let animeItemRepo = MyAnimeListAnimeItemRepository()
-            let favoriteRepo = LocalFavoriteAnimeItemRepository()
-            let useCase = AppAnimeItemUseCase(
-                animeItemRepo: animeItemRepo,
-                favoriteItemRepo: favoriteRepo
-            )
-            
             let subtype: AnimeItemSubtype? = {
                 switch identifier {
                 case .all: return nil
@@ -118,9 +114,7 @@ extension AnimeItemSubtypeListViewController: UICollectionViewDelegate {
                 }
             }()
             
-            let animeItemViewModel = AnimeItemListViewModel(useCase: useCase, type: type, subtype: subtype)
-            let viewController = AnimeItemListViewController(viewModel: animeItemViewModel)
-            navigationController?.pushViewController(viewController, animated: true)
+            didSelectTypeHandler?(self, type, subtype)
         }
     }
 }
