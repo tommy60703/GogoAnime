@@ -41,6 +41,10 @@ class AppAnimeItemUseCase: AnimeItemUseCase {
         return animeItems
     }
     
+    func favoriteAnimeItems() async throws -> [AnimeItem] {
+        try await favoriteItemRepo.favoriteAnimeItems()
+    }
+    
     func addToFavorites(_ animeItem: AnimeItem) async throws -> AnimeItem {
         try await favoriteItemRepo.addToFavorites(animeItem)
     }

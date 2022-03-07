@@ -43,4 +43,12 @@ final class AppCoordinator {
         
         navigationController.pushViewController(viewController, animated: animated)
     }
+    
+    func navigateToFavoriteList(animated: Bool = true) {
+        let useCase = AppAnimeItemUseCase(animeItemRepo: animeItemRepo, favoriteItemRepo: favoriteAnimeItemRepo)
+        let viewModel = FavoriteListViewModel(useCase: useCase)
+        let viewController = FavoriteListViewController(viewModel: viewModel)
+        
+        navigationController.pushViewController(viewController, animated: animated)
+    }
 }
