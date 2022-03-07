@@ -9,11 +9,11 @@ import Combine
 import SafariServices
 import UIKit
 
-final class AnimeItemListViewController: UIViewController {
+final class TopAnimeItemListViewController: UIViewController {
     
     // MARK: - Data
     
-    private let viewModel: AnimeItemListViewModel
+    private let viewModel: TopAnimeItemListViewModel
     
     private var bag = [AnyCancellable]()
     
@@ -40,7 +40,7 @@ final class AnimeItemListViewController: UIViewController {
     
     // MARK: - Lifecycle
     
-    init(viewModel: AnimeItemListViewModel) {
+    init(viewModel: TopAnimeItemListViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -141,7 +141,7 @@ final class AnimeItemListViewController: UIViewController {
     }
 }
 
-extension AnimeItemListViewController: UICollectionViewDelegate {
+extension TopAnimeItemListViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         

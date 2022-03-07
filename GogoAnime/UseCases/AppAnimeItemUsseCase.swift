@@ -9,10 +9,10 @@ import Foundation
 
 class AppAnimeItemUseCase: AnimeItemUseCase {
     
-    var animeItemRepo: AnimeItemRepository
+    var animeItemRepo: TopAnimeItemRepository
     var favoriteItemRepo: FavoriteAnimeItemRepository
     
-    init(animeItemRepo: AnimeItemRepository, favoriteItemRepo: FavoriteAnimeItemRepository) {
+    init(animeItemRepo: TopAnimeItemRepository, favoriteItemRepo: FavoriteAnimeItemRepository) {
         self.animeItemRepo = animeItemRepo
         self.favoriteItemRepo = favoriteItemRepo
     }
@@ -30,8 +30,8 @@ class AppAnimeItemUseCase: AnimeItemUseCase {
         }
     }
     
-    func animeItems(type: AnimeItemType, subtype: AnimeItemSubtype?, page: Int) async throws -> [AnimeItem] {
-        var animeItems = try await animeItemRepo.animeItems(type: type, subtype: subtype, page: page)
+    func topAnimeItems(type: AnimeItemType, subtype: AnimeItemSubtype?, page: Int) async throws -> [AnimeItem] {
+        var animeItems = try await animeItemRepo.topAnimeItems(type: type, subtype: subtype, page: page)
         let favoriteIDs = try await favoriteItemRepo.favoriteAnimeItems().map(\.id)
         
         for (index, var animeItem) in animeItems.enumerated() where favoriteIDs.contains(animeItem.id) {

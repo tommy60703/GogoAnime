@@ -8,14 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		6522E2B827D47A0C00E4DB27 /* AnimeItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6522E2B727D47A0C00E4DB27 /* AnimeItem.swift */; };
-		6522E2BB27D47E5F00E4DB27 /* AnimeItemRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6522E2BA27D47E5F00E4DB27 /* AnimeItemRepository.swift */; };
+		6522E2BB27D47E5F00E4DB27 /* TopAnimeItemRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6522E2BA27D47E5F00E4DB27 /* TopAnimeItemRepository.swift */; };
 		6522E2BD27D4816900E4DB27 /* AnimeItemUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6522E2BC27D4816900E4DB27 /* AnimeItemUseCase.swift */; };
 		6522E2C227D485F700E4DB27 /* MyAnimeListAnimeItemRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6522E2C127D485F700E4DB27 /* MyAnimeListAnimeItemRepository.swift */; };
 		6522E2C427D4865900E4DB27 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6522E2C327D4865900E4DB27 /* Endpoint.swift */; };
 		6522E2C827D4901600E4DB27 /* AppAnimeItemUsseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6522E2C727D4901600E4DB27 /* AppAnimeItemUsseCase.swift */; };
 		6522E2CB27D4966E00E4DB27 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6522E2CA27D4966E00E4DB27 /* APIError.swift */; };
-		6522E2CD27D498CD00E4DB27 /* AnimeItemListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6522E2CC27D498CD00E4DB27 /* AnimeItemListViewController.swift */; };
-		6522E2D027D4AC1700E4DB27 /* AnimeItemListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6522E2CF27D4AC1700E4DB27 /* AnimeItemListViewModel.swift */; };
+		6522E2CD27D498CD00E4DB27 /* TopAnimeItemListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6522E2CC27D498CD00E4DB27 /* TopAnimeItemListViewController.swift */; };
+		6522E2D027D4AC1700E4DB27 /* TopAnimeItemListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6522E2CF27D4AC1700E4DB27 /* TopAnimeItemListViewModel.swift */; };
 		6522E2D427D4B95000E4DB27 /* AnimeItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6522E2D327D4B95000E4DB27 /* AnimeItemView.swift */; };
 		6522E2D627D4BB1500E4DB27 /* UIView+GogoAnime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6522E2D527D4BB1500E4DB27 /* UIView+GogoAnime.swift */; };
 		6522E2D927D4C14F00E4DB27 /* NSLayoutConstraint+GogoAnime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6522E2D827D4C14F00E4DB27 /* NSLayoutConstraint+GogoAnime.swift */; };
@@ -39,14 +39,14 @@
 
 /* Begin PBXFileReference section */
 		6522E2B727D47A0C00E4DB27 /* AnimeItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimeItem.swift; sourceTree = "<group>"; };
-		6522E2BA27D47E5F00E4DB27 /* AnimeItemRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimeItemRepository.swift; sourceTree = "<group>"; };
+		6522E2BA27D47E5F00E4DB27 /* TopAnimeItemRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopAnimeItemRepository.swift; sourceTree = "<group>"; };
 		6522E2BC27D4816900E4DB27 /* AnimeItemUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimeItemUseCase.swift; sourceTree = "<group>"; };
 		6522E2C127D485F700E4DB27 /* MyAnimeListAnimeItemRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAnimeListAnimeItemRepository.swift; sourceTree = "<group>"; };
 		6522E2C327D4865900E4DB27 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		6522E2C727D4901600E4DB27 /* AppAnimeItemUsseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAnimeItemUsseCase.swift; sourceTree = "<group>"; };
 		6522E2CA27D4966E00E4DB27 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
-		6522E2CC27D498CD00E4DB27 /* AnimeItemListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimeItemListViewController.swift; sourceTree = "<group>"; };
-		6522E2CF27D4AC1700E4DB27 /* AnimeItemListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimeItemListViewModel.swift; sourceTree = "<group>"; };
+		6522E2CC27D498CD00E4DB27 /* TopAnimeItemListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopAnimeItemListViewController.swift; sourceTree = "<group>"; };
+		6522E2CF27D4AC1700E4DB27 /* TopAnimeItemListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopAnimeItemListViewModel.swift; sourceTree = "<group>"; };
 		6522E2D327D4B95000E4DB27 /* AnimeItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimeItemView.swift; sourceTree = "<group>"; };
 		6522E2D527D4BB1500E4DB27 /* UIView+GogoAnime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+GogoAnime.swift"; sourceTree = "<group>"; };
 		6522E2D827D4C14F00E4DB27 /* NSLayoutConstraint+GogoAnime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSLayoutConstraint+GogoAnime.swift"; sourceTree = "<group>"; };
@@ -92,7 +92,7 @@
 		6522E2B927D47E5300E4DB27 /* Repository */ = {
 			isa = PBXGroup;
 			children = (
-				6522E2BA27D47E5F00E4DB27 /* AnimeItemRepository.swift */,
+				6522E2BA27D47E5F00E4DB27 /* TopAnimeItemRepository.swift */,
 				6522E2E227D4E47300E4DB27 /* FavoriteAnimeItemRepository.swift */,
 			);
 			path = Repository;
@@ -142,14 +142,14 @@
 			path = UseCases;
 			sourceTree = "<group>";
 		};
-		6522E2CE27D49DC400E4DB27 /* Anime Item List */ = {
+		6522E2CE27D49DC400E4DB27 /* Top Anime Item List */ = {
 			isa = PBXGroup;
 			children = (
-				6522E2CF27D4AC1700E4DB27 /* AnimeItemListViewModel.swift */,
-				6522E2CC27D498CD00E4DB27 /* AnimeItemListViewController.swift */,
+				6522E2CF27D4AC1700E4DB27 /* TopAnimeItemListViewModel.swift */,
+				6522E2CC27D498CD00E4DB27 /* TopAnimeItemListViewController.swift */,
 				6522E2D327D4B95000E4DB27 /* AnimeItemView.swift */,
 			);
-			path = "Anime Item List";
+			path = "Top Anime Item List";
 			sourceTree = "<group>";
 		};
 		6522E2D727D4BB2300E4DB27 /* Extensions */ = {
@@ -201,7 +201,7 @@
 				6522E30527D63D0E00E4DB27 /* Coordinator.swift */,
 				6522E2E727D4FA5000E4DB27 /* Anime Type List */,
 				6522E2F227D4FF2200E4DB27 /* Anime Subtype List */,
-				6522E2CE27D49DC400E4DB27 /* Anime Item List */,
+				6522E2CE27D49DC400E4DB27 /* Top Anime Item List */,
 				6522E30B27D6450000E4DB27 /* Favorite List */,
 			);
 			path = "UI Flow";
@@ -338,13 +338,13 @@
 				6522E30A27D6432600E4DB27 /* FavoriteListViewModel.swift in Sources */,
 				6522E30627D63D0E00E4DB27 /* Coordinator.swift in Sources */,
 				6522E2EF27D4FD8900E4DB27 /* AnimeItemTypeListViewModel.swift in Sources */,
-				6522E2D027D4AC1700E4DB27 /* AnimeItemListViewModel.swift in Sources */,
+				6522E2D027D4AC1700E4DB27 /* TopAnimeItemListViewModel.swift in Sources */,
 				6522E2D427D4B95000E4DB27 /* AnimeItemView.swift in Sources */,
 				6522E2C427D4865900E4DB27 /* Endpoint.swift in Sources */,
 				65D412A927D4773500918850 /* ViewController.swift in Sources */,
-				6522E2CD27D498CD00E4DB27 /* AnimeItemListViewController.swift in Sources */,
+				6522E2CD27D498CD00E4DB27 /* TopAnimeItemListViewController.swift in Sources */,
 				6522E2D927D4C14F00E4DB27 /* NSLayoutConstraint+GogoAnime.swift in Sources */,
-				6522E2BB27D47E5F00E4DB27 /* AnimeItemRepository.swift in Sources */,
+				6522E2BB27D47E5F00E4DB27 /* TopAnimeItemRepository.swift in Sources */,
 				6522E2E527D4E4C100E4DB27 /* LocalFavoriteAnimeItemRepository.swift in Sources */,
 				65D412A527D4773500918850 /* AppDelegate.swift in Sources */,
 				65D412A727D4773500918850 /* SceneDelegate.swift in Sources */,

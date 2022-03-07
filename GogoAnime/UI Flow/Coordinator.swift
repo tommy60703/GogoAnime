@@ -9,7 +9,7 @@ import UIKit
 
 final class AppCoordinator {
     
-    private let animeItemRepo: AnimeItemRepository = MyAnimeListAnimeItemRepository()
+    private let animeItemRepo: TopAnimeItemRepository = MyAnimeListAnimeItemRepository()
     private let favoriteAnimeItemRepo: FavoriteAnimeItemRepository = LocalFavoriteAnimeItemRepository()
     
     let navigationController = UINavigationController()
@@ -41,8 +41,8 @@ final class AppCoordinator {
     
     func navigateToAnimeItemList(animeItemType: AnimeItemType, subtype: AnimeItemSubtype?, animated: Bool = true) {
         let useCase = AppAnimeItemUseCase(animeItemRepo: animeItemRepo, favoriteItemRepo: favoriteAnimeItemRepo)
-        let viewModel = AnimeItemListViewModel(useCase: useCase, type: animeItemType, subtype: subtype)
-        let viewController = AnimeItemListViewController(viewModel: viewModel)
+        let viewModel = TopAnimeItemListViewModel(useCase: useCase, type: animeItemType, subtype: subtype)
+        let viewController = TopAnimeItemListViewController(viewModel: viewModel)
         
         navigationController.pushViewController(viewController, animated: animated)
     }

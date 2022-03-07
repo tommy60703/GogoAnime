@@ -7,9 +7,9 @@
 
 import Foundation
 
-class MyAnimeListAnimeItemRepository: AnimeItemRepository {
+class MyAnimeListAnimeItemRepository: TopAnimeItemRepository {
     
-    func animeItems(type: AnimeItemType, subtype: AnimeItemSubtype?, page: Int) async throws -> [AnimeItem] {
+    func topAnimeItems(type: AnimeItemType, subtype: AnimeItemSubtype?, page: Int) async throws -> [AnimeItem] {
         
         struct ResponseModel: Decodable {
             var top: [AnimeItem]

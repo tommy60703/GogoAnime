@@ -19,7 +19,7 @@ enum ViewModelState {
     }
 }
 
-final class AnimeItemListViewModel {
+final class TopAnimeItemListViewModel {
     
     @Published private(set) var reloadState: ViewModelState = .idle
     @Published private(set) var loadMoreState: ViewModelState = .idle
@@ -85,7 +85,7 @@ final class AnimeItemListViewModel {
         
         Task {
             do {
-                animeItems = try await useCase.animeItems(type: type, subtype: subtype, page: 1)
+                animeItems = try await useCase.topAnimeItems(type: type, subtype: subtype, page: 1)
                 currentPage = 1
                 reloadState = .idle
             } catch {
@@ -103,7 +103,7 @@ final class AnimeItemListViewModel {
         
         loadMoreTask = Task {
             do {
-                let newItems = try await useCase.animeItems(type: type, subtype: subtype, page: currentPage + 1)
+                let newItems = try await useCase.topAnimeItems(type: type, subtype: subtype, page: currentPage + 1)
                 if let animeItems = animeItems {
                     self.animeItems = animeItems + newItems
                 } else {
