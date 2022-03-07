@@ -18,8 +18,25 @@ final class FavoriteListViewController: UIViewController {
     
     // MARK: - UI
     
-    private let collectionView: UICollectionView = {
-        let config = UICollectionLayoutListConfiguration(appearance: .plain)
+    private lazy var collectionView: UICollectionView = {
+        var config = UICollectionLayoutListConfiguration(appearance: .plain)
+        
+        config.trailingSwipeActionsConfigurationProvider = { [weak self] indexPath in
+            
+            guard let self = self else { return nil }
+            
+            let item = self.viewModel.animeItems[indexPath.item]
+            
+            let action = UIContextualAction(style: .destructive, title: "Unfavorite") { action, view, completion in
+                completion(true)
+                self.viewModel.removeFromFavorites(item)
+            }
+            action.image = UIImage(systemName: "heart.slash.fill")
+            action.backgroundColor = .systemPink
+            
+            return UISwipeActionsConfiguration(actions: [action])
+        }
+        
         let layout = UICollectionViewCompositionalLayout.list(using: config)
         return UICollectionView(frame: .zero, collectionViewLayout: layout)
     }()
