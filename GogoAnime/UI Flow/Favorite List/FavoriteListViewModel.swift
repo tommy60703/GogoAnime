@@ -28,4 +28,15 @@ final class FavoriteListViewModel {
             }
         }
     }
+    
+    func removeFromFavorites(_ animeItem: AnimeItem) {
+        Task {
+            do {
+                _ = try await useCase.removeFromFavorites(animeItem)
+                animeItems.removeAll { $0.id == animeItem.id }
+            } catch {
+                debugPrint(error)
+            }
+        }
+    }
 }

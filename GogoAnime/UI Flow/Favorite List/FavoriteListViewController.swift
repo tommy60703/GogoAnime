@@ -91,7 +91,7 @@ final class FavoriteListViewController: UIViewController {
             
             let item = self.viewModel.animeItems[indexPath.item]
             
-            let content = AnimeItemConfiguration(
+            var content = AnimeItemConfiguration(
                 imageURL: item.imageURL,
                 title: item.title,
                 rank: item.rank,
@@ -99,9 +99,9 @@ final class FavoriteListViewController: UIViewController {
                 type: item.type,
                 isFavorite: item.isFavorite
             )
-//            content.addToFavoriteHandler = { [unowned viewModel] isFavorite in
-//                isFavorite ? viewModel.addToFavorites(item) : viewModel.removeFromFavorites(item)
-//            }
+            content.addToFavoriteHandler = { [unowned viewModel] _ in
+                viewModel.removeFromFavorites(item)
+            }
             cell.contentConfiguration = content
         }
         
