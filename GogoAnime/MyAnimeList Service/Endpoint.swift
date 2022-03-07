@@ -31,7 +31,7 @@ extension Endpoint {
         var queryItems: [URLQueryItem]?
         var httpBody: Data?
         
-        if let parameters = parameters {
+        if let parameters = parameters, !parameters.isEmpty {
             switch httpMethod {
             case .get:
                 queryItems = parameters.map { key, value in

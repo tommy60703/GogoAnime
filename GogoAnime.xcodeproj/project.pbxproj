@@ -32,6 +32,7 @@
 		6522E30D27D65A1E00E4DB27 /* UseCaseFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6522E30C27D65A1E00E4DB27 /* UseCaseFactory.swift */; };
 		6522E30F27D65A4F00E4DB27 /* AppUseCaseFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6522E30E27D65A4F00E4DB27 /* AppUseCaseFactory.swift */; };
 		6522E31E27D65BFD00E4DB27 /* AnimeItemCodableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6522E31D27D65BFD00E4DB27 /* AnimeItemCodableTests.swift */; };
+		6522E32027D65C7E00E4DB27 /* EndpointTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6522E31F27D65C7E00E4DB27 /* EndpointTests.swift */; };
 		65D412A527D4773500918850 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D412A427D4773500918850 /* AppDelegate.swift */; };
 		65D412A727D4773500918850 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D412A627D4773500918850 /* SceneDelegate.swift */; };
 		65D412A927D4773500918850 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D412A827D4773500918850 /* ViewController.swift */; };
@@ -76,6 +77,7 @@
 		6522E30E27D65A4F00E4DB27 /* AppUseCaseFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUseCaseFactory.swift; sourceTree = "<group>"; };
 		6522E31427D65BD900E4DB27 /* GogoAnimeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GogoAnimeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6522E31D27D65BFD00E4DB27 /* AnimeItemCodableTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimeItemCodableTests.swift; sourceTree = "<group>"; };
+		6522E31F27D65C7E00E4DB27 /* EndpointTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndpointTests.swift; sourceTree = "<group>"; };
 		65D412A127D4773500918850 /* GogoAnime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GogoAnime.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		65D412A427D4773500918850 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		65D412A627D4773500918850 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -246,6 +248,7 @@
 			isa = PBXGroup;
 			children = (
 				6522E31D27D65BFD00E4DB27 /* AnimeItemCodableTests.swift */,
+				6522E31F27D65C7E00E4DB27 /* EndpointTests.swift */,
 			);
 			path = GogoAnimeTests;
 			sourceTree = "<group>";
@@ -395,6 +398,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6522E32027D65C7E00E4DB27 /* EndpointTests.swift in Sources */,
 				6522E31E27D65BFD00E4DB27 /* AnimeItemCodableTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
