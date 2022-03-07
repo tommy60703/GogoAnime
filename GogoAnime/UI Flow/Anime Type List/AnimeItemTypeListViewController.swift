@@ -13,8 +13,10 @@ final class AnimeItemTypeListViewController: UIViewController {
     // MARK: - Data
     
     typealias DidSelectTypeHandler = (AnimeItemTypeListViewController, AnimeItemType) -> Void
+    typealias DidSelectFavoriteHandler = (AnimeItemTypeListViewController) -> Void
     
     var didSelectTypeHandler: DidSelectTypeHandler?
+    var didSelectFavoriteHandler: DidSelectFavoriteHandler?
 
     private let viewModel: AnimeItemTypeListViewModel
     
@@ -30,10 +32,16 @@ final class AnimeItemTypeListViewController: UIViewController {
     
     private enum Section: Hashable {
         case animeItemType
+        case favorite
     }
     
-    private typealias DataSource = UICollectionViewDiffableDataSource<Section, AnimeItemType>
-    private typealias Snapshot = NSDiffableDataSourceSnapshot<Section, AnimeItemType>
+    private enum Identifier: Hashable {
+        case animeItemType(AnimeItemType)
+        case favorite
+    }
+    
+    private typealias DataSource = UICollectionViewDiffableDataSource<Section, Identifier>
+    private typealias Snapshot = NSDiffableDataSourceSnapshot<Section, Identifier>
     
     private lazy var dataSource = makeDataSource()
     
@@ -66,8 +74,9 @@ final class AnimeItemTypeListViewController: UIViewController {
             .receive(on: DispatchQueue.main)
             .sink { [unowned self] animeTypes in
                 var snapshot = Snapshot()
-                snapshot.appendSections([.animeItemType])
-                snapshot.appendItems(animeTypes, toSection: .animeItemType)
+                snapshot.appendSections([.animeItemType, .favorite])
+                snapshot.appendItems(animeTypes.map { .animeItemType($0) }, toSection: .animeItemType)
+                snapshot.appendItems([.favorite], toSection: .favorite)
                 dataSource.apply(snapshot)
             }
             .store(in: &bag)
@@ -77,9 +86,16 @@ final class AnimeItemTypeListViewController: UIViewController {
     
     private func makeDataSource() -> DataSource {
         
-        let cellRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, AnimeItemType> { cell, indexPath, identifier in
+        let cellRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, Identifier> { cell, indexPath, identifier in
             var content = cell.defaultContentConfiguration()
-            content.text = identifier.rawValue.capitalized
+            
+            switch identifier {
+            case .animeItemType(let type):
+                content.text = type.rawValue.capitalized
+                
+            case .favorite:
+                content.text = "Favorite List"
+            }
             cell.contentConfiguration = content
         }
         
@@ -92,8 +108,14 @@ final class AnimeItemTypeListViewController: UIViewController {
 extension AnimeItemTypeListViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if let type = dataSource.itemIdentifier(for: indexPath) {
-            didSelectTypeHandler?(self, type)
+        if let identifier = dataSource.itemIdentifier(for: indexPath) {
+            switch identifier {
+            case .animeItemType(let type):
+                didSelectTypeHandler?(self, type)
+                
+            case .favorite:
+                didSelectFavoriteHandler?(self)
+            }
         }
     }
 }

@@ -21,6 +21,9 @@ final class AppCoordinator {
         viewController.didSelectTypeHandler = { [unowned self] _, type in
             navigateToAnimeItemSubtypeList(animeItemType: type)
         }
+        viewController.didSelectFavoriteHandler = { [unowned self] _ in
+            navigateToFavoriteList()
+        }
         
         navigationController.pushViewController(viewController, animated: false)
     }

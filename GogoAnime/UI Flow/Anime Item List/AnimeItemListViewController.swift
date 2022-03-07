@@ -30,9 +30,9 @@ final class AnimeItemListViewController: UIViewController {
     })
     
     private enum Section: Hashable {
-        case topAnime
+        case top
     }
-    
+        
     private typealias DataSource = UICollectionViewDiffableDataSource<Section, AnimeItem.ID>
     private typealias Snapshot = NSDiffableDataSourceSnapshot<Section, AnimeItem.ID>
     
@@ -94,8 +94,8 @@ final class AnimeItemListViewController: UIViewController {
             .sink { [weak self] animeItems in
                 if let animeItems = animeItems {
                     var snapshot = Snapshot()
-                    snapshot.appendSections([.topAnime])
-                    snapshot.appendItems(animeItems.map(\.id), toSection: .topAnime)
+                    snapshot.appendSections([.top])
+                    snapshot.appendItems(animeItems.map(\.id), toSection: .top)
 
                     self?.dataSource.apply(snapshot)
                 }
@@ -145,12 +145,12 @@ extension AnimeItemListViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         
-        let itemIdentifiers = dataSource.snapshot().itemIdentifiers(inSection: .topAnime)
+        let itemIdentifiers = dataSource.snapshot().itemIdentifiers(inSection: .top)
         guard let lastIdentifier = itemIdentifiers.last else {
             return
         }
         
-        let identifier = dataSource.snapshot().itemIdentifiers(inSection: .topAnime)[indexPath.item]
+        let identifier = dataSource.snapshot().itemIdentifiers(inSection: .top)[indexPath.item]
         
         if identifier == lastIdentifier {
             viewModel.loadMore()
