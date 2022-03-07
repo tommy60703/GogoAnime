@@ -9,13 +9,16 @@ import UIKit
 
 final class AppCoordinator {
     
-    private let animeItemRepo: TopAnimeItemRepository = MyAnimeListAnimeItemRepository()
-    private let favoriteAnimeItemRepo: FavoriteAnimeItemRepository = LocalFavoriteAnimeItemRepository()
-    
     let navigationController = UINavigationController()
     
+    private let useCaseFactory: UseCaseFactory
+    
+    init(useCaseFactory: UseCaseFactory) {
+        self.useCaseFactory = useCaseFactory
+    }
+    
     func start() {
-        let useCase = AppAnimeItemUseCase(animeItemRepo: animeItemRepo, favoriteItemRepo: favoriteAnimeItemRepo)
+        let useCase = useCaseFactory.makeAnimeItemUseCase()
         let viewModel = AnimeItemTypeListViewModel(useCase: useCase)
         let viewController = AnimeItemTypeListViewController(viewModel: viewModel)
         viewController.didSelectTypeHandler = { [unowned self] _, type in
@@ -29,7 +32,7 @@ final class AppCoordinator {
     }
     
     func navigateToAnimeItemSubtypeList(animeItemType: AnimeItemType, animated: Bool = true) {
-        let useCase = AppAnimeItemUseCase(animeItemRepo: animeItemRepo, favoriteItemRepo: favoriteAnimeItemRepo)
+        let useCase = useCaseFactory.makeAnimeItemUseCase()
         let viewModel = AnimeItemSubtypeListViewModel(useCase: useCase, type: animeItemType)
         let viewController = AnimeItemSubtypeListViewController(viewModel: viewModel)
         viewController.didSelectTypeHandler = { [unowned self] _, type, subtype in
@@ -40,7 +43,7 @@ final class AppCoordinator {
     }
     
     func navigateToAnimeItemList(animeItemType: AnimeItemType, subtype: AnimeItemSubtype?, animated: Bool = true) {
-        let useCase = AppAnimeItemUseCase(animeItemRepo: animeItemRepo, favoriteItemRepo: favoriteAnimeItemRepo)
+        let useCase = useCaseFactory.makeAnimeItemUseCase()
         let viewModel = TopAnimeItemListViewModel(useCase: useCase, type: animeItemType, subtype: subtype)
         let viewController = TopAnimeItemListViewController(viewModel: viewModel)
         
@@ -48,7 +51,7 @@ final class AppCoordinator {
     }
     
     func navigateToFavoriteList(animated: Bool = true) {
-        let useCase = AppAnimeItemUseCase(animeItemRepo: animeItemRepo, favoriteItemRepo: favoriteAnimeItemRepo)
+        let useCase = useCaseFactory.makeAnimeItemUseCase()
         let viewModel = FavoriteListViewModel(useCase: useCase)
         let viewController = FavoriteListViewController(viewModel: viewModel)
         

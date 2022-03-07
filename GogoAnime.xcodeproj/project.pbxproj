@@ -29,6 +29,8 @@
 		6522E30627D63D0E00E4DB27 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6522E30527D63D0E00E4DB27 /* Coordinator.swift */; };
 		6522E30827D642CA00E4DB27 /* FavoriteListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6522E30727D642CA00E4DB27 /* FavoriteListViewController.swift */; };
 		6522E30A27D6432600E4DB27 /* FavoriteListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6522E30927D6432600E4DB27 /* FavoriteListViewModel.swift */; };
+		6522E30D27D65A1E00E4DB27 /* UseCaseFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6522E30C27D65A1E00E4DB27 /* UseCaseFactory.swift */; };
+		6522E30F27D65A4F00E4DB27 /* AppUseCaseFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6522E30E27D65A4F00E4DB27 /* AppUseCaseFactory.swift */; };
 		65D412A527D4773500918850 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D412A427D4773500918850 /* AppDelegate.swift */; };
 		65D412A727D4773500918850 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D412A627D4773500918850 /* SceneDelegate.swift */; };
 		65D412A927D4773500918850 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D412A827D4773500918850 /* ViewController.swift */; };
@@ -59,6 +61,8 @@
 		6522E30527D63D0E00E4DB27 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		6522E30727D642CA00E4DB27 /* FavoriteListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteListViewController.swift; sourceTree = "<group>"; };
 		6522E30927D6432600E4DB27 /* FavoriteListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteListViewModel.swift; sourceTree = "<group>"; };
+		6522E30C27D65A1E00E4DB27 /* UseCaseFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseCaseFactory.swift; sourceTree = "<group>"; };
+		6522E30E27D65A4F00E4DB27 /* AppUseCaseFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUseCaseFactory.swift; sourceTree = "<group>"; };
 		65D412A127D4773500918850 /* GogoAnime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GogoAnime.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		65D412A427D4773500918850 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		65D412A627D4773500918850 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -101,6 +105,7 @@
 		6522E2BE27D482DC00E4DB27 /* UseCases */ = {
 			isa = PBXGroup;
 			children = (
+				6522E30C27D65A1E00E4DB27 /* UseCaseFactory.swift */,
 				6522E2BC27D4816900E4DB27 /* AnimeItemUseCase.swift */,
 			);
 			path = UseCases;
@@ -138,6 +143,7 @@
 			isa = PBXGroup;
 			children = (
 				6522E2C727D4901600E4DB27 /* AppAnimeItemUsseCase.swift */,
+				6522E30E27D65A4F00E4DB27 /* AppUseCaseFactory.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -339,6 +345,7 @@
 				6522E30627D63D0E00E4DB27 /* Coordinator.swift in Sources */,
 				6522E2EF27D4FD8900E4DB27 /* AnimeItemTypeListViewModel.swift in Sources */,
 				6522E2D027D4AC1700E4DB27 /* TopAnimeItemListViewModel.swift in Sources */,
+				6522E30F27D65A4F00E4DB27 /* AppUseCaseFactory.swift in Sources */,
 				6522E2D427D4B95000E4DB27 /* AnimeItemView.swift in Sources */,
 				6522E2C427D4865900E4DB27 /* Endpoint.swift in Sources */,
 				65D412A927D4773500918850 /* ViewController.swift in Sources */,
@@ -347,6 +354,7 @@
 				6522E2BB27D47E5F00E4DB27 /* TopAnimeItemRepository.swift in Sources */,
 				6522E2E527D4E4C100E4DB27 /* LocalFavoriteAnimeItemRepository.swift in Sources */,
 				65D412A527D4773500918850 /* AppDelegate.swift in Sources */,
+				6522E30D27D65A1E00E4DB27 /* UseCaseFactory.swift in Sources */,
 				65D412A727D4773500918850 /* SceneDelegate.swift in Sources */,
 				6522E2B827D47A0C00E4DB27 /* AnimeItem.swift in Sources */,
 				6522E2F127D4FEEC00E4DB27 /* AnimeItemSubtypeListViewController.swift in Sources */,
