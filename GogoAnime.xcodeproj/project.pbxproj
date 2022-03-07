@@ -31,6 +31,7 @@
 		6522E30A27D6432600E4DB27 /* FavoriteListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6522E30927D6432600E4DB27 /* FavoriteListViewModel.swift */; };
 		6522E30D27D65A1E00E4DB27 /* UseCaseFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6522E30C27D65A1E00E4DB27 /* UseCaseFactory.swift */; };
 		6522E30F27D65A4F00E4DB27 /* AppUseCaseFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6522E30E27D65A4F00E4DB27 /* AppUseCaseFactory.swift */; };
+		6522E31E27D65BFD00E4DB27 /* AnimeItemCodableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6522E31D27D65BFD00E4DB27 /* AnimeItemCodableTests.swift */; };
 		65D412A527D4773500918850 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D412A427D4773500918850 /* AppDelegate.swift */; };
 		65D412A727D4773500918850 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D412A627D4773500918850 /* SceneDelegate.swift */; };
 		65D412A927D4773500918850 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D412A827D4773500918850 /* ViewController.swift */; };
@@ -38,6 +39,16 @@
 		65D412AE27D4773600918850 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65D412AD27D4773600918850 /* Assets.xcassets */; };
 		65D412B127D4773600918850 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65D412AF27D4773600918850 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		6522E31827D65BD900E4DB27 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 65D4129927D4773500918850 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 65D412A027D4773500918850;
+			remoteInfo = GogoAnime;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		6522E2B727D47A0C00E4DB27 /* AnimeItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimeItem.swift; sourceTree = "<group>"; };
@@ -63,6 +74,8 @@
 		6522E30927D6432600E4DB27 /* FavoriteListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteListViewModel.swift; sourceTree = "<group>"; };
 		6522E30C27D65A1E00E4DB27 /* UseCaseFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseCaseFactory.swift; sourceTree = "<group>"; };
 		6522E30E27D65A4F00E4DB27 /* AppUseCaseFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUseCaseFactory.swift; sourceTree = "<group>"; };
+		6522E31427D65BD900E4DB27 /* GogoAnimeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GogoAnimeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6522E31D27D65BFD00E4DB27 /* AnimeItemCodableTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimeItemCodableTests.swift; sourceTree = "<group>"; };
 		65D412A127D4773500918850 /* GogoAnime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GogoAnime.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		65D412A427D4773500918850 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		65D412A627D4773500918850 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -74,6 +87,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		6522E31127D65BD900E4DB27 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		65D4129E27D4773500918850 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -222,10 +242,19 @@
 			path = "Favorite List";
 			sourceTree = "<group>";
 		};
+		6522E31527D65BD900E4DB27 /* GogoAnimeTests */ = {
+			isa = PBXGroup;
+			children = (
+				6522E31D27D65BFD00E4DB27 /* AnimeItemCodableTests.swift */,
+			);
+			path = GogoAnimeTests;
+			sourceTree = "<group>";
+		};
 		65D4129827D4773500918850 = {
 			isa = PBXGroup;
 			children = (
 				65D412A327D4773500918850 /* GogoAnime */,
+				6522E31527D65BD900E4DB27 /* GogoAnimeTests */,
 				65D412A227D4773500918850 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -234,6 +263,7 @@
 			isa = PBXGroup;
 			children = (
 				65D412A127D4773500918850 /* GogoAnime.app */,
+				6522E31427D65BD900E4DB27 /* GogoAnimeTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -261,6 +291,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		6522E31327D65BD900E4DB27 /* GogoAnimeTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6522E31C27D65BD900E4DB27 /* Build configuration list for PBXNativeTarget "GogoAnimeTests" */;
+			buildPhases = (
+				6522E31027D65BD900E4DB27 /* Sources */,
+				6522E31127D65BD900E4DB27 /* Frameworks */,
+				6522E31227D65BD900E4DB27 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6522E31927D65BD900E4DB27 /* PBXTargetDependency */,
+			);
+			name = GogoAnimeTests;
+			productName = GogoAnimeTests;
+			productReference = 6522E31427D65BD900E4DB27 /* GogoAnimeTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		65D412A027D4773500918850 /* GogoAnime */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 65D412B527D4773600918850 /* Build configuration list for PBXNativeTarget "GogoAnime" */;
@@ -291,6 +339,10 @@
 				LastSwiftUpdateCheck = 1320;
 				LastUpgradeCheck = 1320;
 				TargetAttributes = {
+					6522E31327D65BD900E4DB27 = {
+						CreatedOnToolsVersion = 13.2.1;
+						TestTargetID = 65D412A027D4773500918850;
+					};
 					65D412A027D4773500918850 = {
 						CreatedOnToolsVersion = 13.2.1;
 					};
@@ -313,11 +365,19 @@
 			projectRoot = "";
 			targets = (
 				65D412A027D4773500918850 /* GogoAnime */,
+				6522E31327D65BD900E4DB27 /* GogoAnimeTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		6522E31227D65BD900E4DB27 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		65D4129F27D4773500918850 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -331,6 +391,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		6522E31027D65BD900E4DB27 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6522E31E27D65BFD00E4DB27 /* AnimeItemCodableTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		65D4129D27D4773500918850 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -366,6 +434,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		6522E31927D65BD900E4DB27 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 65D412A027D4773500918850 /* GogoAnime */;
+			targetProxy = 6522E31827D65BD900E4DB27 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		65D412AA27D4773500918850 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
@@ -386,6 +462,42 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		6522E31A27D65BD900E4DB27 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = XR36VWF86K;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = cc.tommylin.GogoAnimeTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GogoAnime.app/GogoAnime";
+			};
+			name = Debug;
+		};
+		6522E31B27D65BD900E4DB27 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = XR36VWF86K;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = cc.tommylin.GogoAnimeTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GogoAnime.app/GogoAnime";
+			};
+			name = Release;
+		};
 		65D412B327D4773600918850 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -561,6 +673,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		6522E31C27D65BD900E4DB27 /* Build configuration list for PBXNativeTarget "GogoAnimeTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6522E31A27D65BD900E4DB27 /* Debug */,
+				6522E31B27D65BD900E4DB27 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		65D4129C27D4773500918850 /* Build configuration list for PBXProject "GogoAnime" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
