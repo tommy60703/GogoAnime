@@ -8,8 +8,6 @@
 import Foundation
 
 protocol AnimeItemUseCase {
-    var animeItemRepo: TopAnimeItemRepository { get }
-    
     func availableTypes() -> [AnimeItemType]
     func availableSubtypes(for type: AnimeItemType) -> [AnimeItemSubtype]
     
