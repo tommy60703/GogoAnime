@@ -116,9 +116,8 @@ final class FavoriteListViewController: UIViewController {
                 type: item.type,
                 isFavorite: item.isFavorite
             )
-            content.addToFavoriteHandler = { [unowned viewModel] _ in
-                viewModel.removeFromFavorites(item)
-            }
+            content.isFavoriteListCell = true
+            
             cell.contentConfiguration = content
         }
         
