@@ -21,7 +21,7 @@ final class AnimeItemView: UIView, UIContentView {
     private let rankLabel = UILabel()
     private let typeLabel = UILabel()
     private let dateLabel = UILabel()
-    private let addToFavoriteButton = UIButton(type: .custom)
+    private let addToFavoriteButton = Button(type: .custom)
     
     private var addToFavoriteHandler: AnimeItemConfiguration.AddToFavoriteHandler?
     
@@ -109,6 +109,18 @@ final class AnimeItemView: UIView, UIContentView {
         addToFavoriteButton.isHidden = configuration.isFavoriteListCell
         
         addToFavoriteHandler = configuration.addToFavoriteHandler
+    }
+    
+    private final class Button: UIButton {
+        
+        override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
+            let minimumSize = CGSize(width: 44, height: 44)
+            
+            let dx = -max(minimumSize.width - bounds.width, 0) / 2
+            let dy = -max(minimumSize.height - bounds.height, 0) / 2
+            
+            return bounds.insetBy(dx: dx, dy: dy).contains(point)
+        }
     }
 }
 
