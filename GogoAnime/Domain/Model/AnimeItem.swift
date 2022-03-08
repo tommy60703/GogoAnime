@@ -7,7 +7,19 @@
 
 import Foundation
 
-struct AnimeItem: Hashable, Codable {
+struct AnimeItem: Equatable, Hashable, Codable {
+    
+    init(id: AnimeItem.ID, urlString: String? = nil, imageURLString: String? = nil, title: String, rank: Int, startDate: String? = nil, endDate: String? = nil, type: String, isFavoriteOrNil: Bool? = nil) {
+        self.id = id
+        self.urlString = urlString
+        self.imageURLString = imageURLString
+        self.title = title
+        self.rank = rank
+        self.startDate = startDate
+        self.endDate = endDate
+        self.type = type
+        self.isFavoriteOrNil = isFavoriteOrNil
+    }
     
     typealias ID = Int
     
