@@ -31,14 +31,14 @@ class AppAnimeItemUseCase: AnimeItemUseCase {
     }
     
     func topAnimeItems(type: AnimeItemType, subtype: AnimeItemSubtype?, page: Int) async throws -> [AnimeItem] {
-        var animeItems = try await animeItemRepo.topAnimeItems(type: type, subtype: subtype, page: page)
+        let animeItems = try await animeItemRepo.topAnimeItems(type: type, subtype: subtype, page: page)
         let favoriteIDs = try await favoriteItemRepo.favoriteAnimeItems().map(\.id)
         
-        for (index, var animeItem) in animeItems.enumerated() where favoriteIDs.contains(animeItem.id) {
-            animeItem.isFavorite = true
-            animeItems[index] = animeItem
+        return animeItems.map { item in
+            var updated = item
+            updated.isFavorite = favoriteIDs.contains(item.id)
+            return updated
         }
-        return animeItems
     }
     
     func favoriteAnimeItems() async throws -> [AnimeItem] {
