@@ -21,6 +21,10 @@ enum ViewModelState {
 
 final class TopAnimeItemListViewModel {
     
+    @globalActor actor Actor: GlobalActor {
+        static let shared: Actor = Actor()
+    }
+    
     @Published private(set) var reloadState: ViewModelState = .idle
     @Published private(set) var loadMoreState: ViewModelState = .idle
     @Published private(set) var animeItems: [AnimeItem]?
@@ -40,80 +44,77 @@ final class TopAnimeItemListViewModel {
         self.subtype = subtype
     }
     
-    func addToFavorites(_ animeItem: AnimeItem) {
-        Task {
-            do {
-                let updated = try await useCase.addToFavorites(animeItem)
-                
-                let index = animeItems?.firstIndex { $0.id == animeItem.id }
-                
-                if let index = index {
-                    animeItems?[index] = updated
-                    animeItemDidUpdate.send(animeItem.id)
-                }
-            } catch {
-                debugPrint(error)
+    @Actor func addToFavorites(_ animeItem: AnimeItem) async {
+        do {
+            let updated = try await useCase.addToFavorites(animeItem)
+            
+            let index = animeItems?.firstIndex { $0.id == animeItem.id }
+            
+            if let index = index {
+                animeItems?[index] = updated
+                animeItemDidUpdate.send(animeItem.id)
             }
+        } catch {
+            debugPrint(error)
         }
     }
     
-    func removeFromFavorites(_ animeItem: AnimeItem) {
-        Task {
-            do {
-                let updated = try await useCase.removeFromFavorites(animeItem)
-                
-                let index = animeItems?.firstIndex { $0.id == animeItem.id }
-                
-                if let index = index {
-                    animeItems?[index] = updated
-                    animeItemDidUpdate.send(animeItem.id)
-                }
-            } catch {
-                debugPrint(error)
+    @Actor func removeFromFavorites(_ animeItem: AnimeItem) async {
+        do {
+            let updated = try await useCase.removeFromFavorites(animeItem)
+            
+            let index = animeItems?.firstIndex { $0.id == animeItem.id }
+            
+            if let index = index {
+                animeItems?[index] = updated
+                animeItemDidUpdate.send(animeItem.id)
             }
+        } catch {
+            debugPrint(error)
         }
     }
     
-    func reload() {
+    @Actor func reload() async {
         guard !reloadState.isLoading else {
             return
         }
         
-        loadMoreTask?.cancel()
         loadMoreState = .idle
         reloadState = .loading
         
-        Task {
-            do {
-                animeItems = try await useCase.topAnimeItems(type: type, subtype: subtype, page: 1)
-                currentPage = 1
-                reloadState = .idle
-            } catch {
-                reloadState = .error(error)
-            }
+        do {
+            animeItems = try await useCase.topAnimeItems(type: type, subtype: subtype, page: 1)
+            currentPage = 1
+            reloadState = .idle
+        } catch {
+            reloadState = .error(error)
         }
     }
     
-    func loadMore() {
+    @Actor func loadMore() async {
         guard !reloadState.isLoading, !loadMoreState.isLoading else {
             return
         }
         
         loadMoreState = .loading
         
-        loadMoreTask = Task {
-            do {
-                let newItems = try await useCase.topAnimeItems(type: type, subtype: subtype, page: currentPage + 1)
-                if let animeItems = animeItems {
-                    self.animeItems = animeItems + newItems
-                } else {
-                    self.animeItems = newItems
-                }
-                currentPage += 1
-                loadMoreState = .idle
-            } catch {
-                loadMoreState = .error(error)
+        do {
+            let newItems = try await useCase.topAnimeItems(type: type, subtype: subtype, page: currentPage + 1)
+            
+            guard loadMoreState.isLoading else {
+                return
             }
+            
+            if let animeItems = animeItems {
+                self.animeItems = animeItems + newItems
+            } else {
+                self.animeItems = newItems
+            }
+            currentPage += 1
+            loadMoreState = .idle
+            
+        } catch {
+            loadMoreState = .error(error)
         }
     }
 }

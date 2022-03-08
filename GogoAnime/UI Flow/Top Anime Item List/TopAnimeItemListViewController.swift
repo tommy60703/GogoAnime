@@ -26,7 +26,9 @@ final class TopAnimeItemListViewController: UIViewController {
     }()
     
     private lazy var refreshControl = UIRefreshControl(frame: .zero, primaryAction: UIAction { _ in
-        self.viewModel.reload()
+        Task {
+            await self.viewModel.reload()
+        }
     })
     
     private enum Section: Hashable {
@@ -71,9 +73,11 @@ final class TopAnimeItemListViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+
         if viewModel.animeItems == nil {
-            viewModel.reload()
+            Task {
+                await viewModel.reload()
+            }
         }
     }
     
@@ -130,7 +134,9 @@ final class TopAnimeItemListViewController: UIViewController {
                 isFavorite: item.isFavorite
             )
             content.addToFavoriteHandler = { [unowned viewModel] isFavorite in
-                isFavorite ? viewModel.addToFavorites(item) : viewModel.removeFromFavorites(item)
+                Task {
+                    await isFavorite ? viewModel.addToFavorites(item) : viewModel.removeFromFavorites(item)
+                }
             }
             cell.contentConfiguration = content
         }
@@ -153,7 +159,9 @@ extension TopAnimeItemListViewController: UICollectionViewDelegate {
         let identifier = dataSource.snapshot().itemIdentifiers(inSection: .top)[indexPath.item]
         
         if identifier == lastIdentifier {
-            viewModel.loadMore()
+            Task {
+                await viewModel.loadMore()
+            }
         }
     }
     

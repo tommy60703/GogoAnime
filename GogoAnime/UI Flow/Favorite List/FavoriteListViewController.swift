@@ -29,7 +29,9 @@ final class FavoriteListViewController: UIViewController {
             
             let action = UIContextualAction(style: .destructive, title: "Unfavorite") { action, view, completion in
                 completion(true)
-                self.viewModel.removeFromFavorites(item)
+                Task {
+                    await self.viewModel.removeFromFavorites(item)
+                }
             }
             action.image = UIImage(systemName: "heart.slash.fill")
             action.backgroundColor = .systemPink
@@ -82,7 +84,9 @@ final class FavoriteListViewController: UIViewController {
         super.viewWillAppear(animated)
         
         if viewModel.animeItems.isEmpty {
-            viewModel.load()
+            Task {
+                await viewModel.load()
+            }
         }
     }
     

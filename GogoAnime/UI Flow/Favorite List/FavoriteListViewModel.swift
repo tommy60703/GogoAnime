@@ -10,6 +10,10 @@ import Foundation
 
 final class FavoriteListViewModel {
     
+    @globalActor actor Actor: GlobalActor {
+        static let shared: Actor = Actor()
+    }
+    
     @Published private(set) var animeItems: [AnimeItem] = []
     
     private let useCase: AnimeItemUseCase
@@ -18,25 +22,21 @@ final class FavoriteListViewModel {
         self.useCase = useCase
     }
     
-    func load() {
-        Task {
-            do {
-                animeItems = try await useCase.favoriteAnimeItems()
-            } catch {
-                debugPrint(error)
-                animeItems = []
-            }
+    @Actor func load() async {
+        do {
+            animeItems = try await useCase.favoriteAnimeItems()
+        } catch {
+            debugPrint(error)
+            animeItems = []
         }
     }
     
-    func removeFromFavorites(_ animeItem: AnimeItem) {
-        Task {
-            do {
-                _ = try await useCase.removeFromFavorites(animeItem)
-                animeItems.removeAll { $0.id == animeItem.id }
-            } catch {
-                debugPrint(error)
-            }
+    @Actor func removeFromFavorites(_ animeItem: AnimeItem) async {
+        do {
+            _ = try await useCase.removeFromFavorites(animeItem)
+            animeItems.removeAll { $0.id == animeItem.id }
+        } catch {
+            debugPrint(error)
         }
     }
 }
