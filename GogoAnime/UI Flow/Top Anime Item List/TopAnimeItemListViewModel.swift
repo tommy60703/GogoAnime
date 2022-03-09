@@ -52,8 +52,8 @@ final class TopAnimeItemListViewModel {
     private var loadMoreTask: Task<(), Never>?
     
     private let useCase: AnimeItemUseCase
-    private let type: AnimeItemType
-    private let subtype: AnimeItemSubtype?
+    let type: AnimeItemType
+    let subtype: AnimeItemSubtype?
     
     init(useCase: AnimeItemUseCase, type: AnimeItemType, subtype: AnimeItemSubtype?) {
         self.useCase = useCase

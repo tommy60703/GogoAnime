@@ -38,6 +38,13 @@ final class AnimeItemTypeListViewController: UIViewController {
     private enum Identifier: Hashable {
         case animeItemType(AnimeItemType)
         case favorite
+        
+        var title: String {
+            switch self {
+            case .animeItemType(let type): return type.title
+            case .favorite: return "My Favorites"
+            }
+        }
     }
     
     private typealias DataSource = UICollectionViewDiffableDataSource<Section, Identifier>
@@ -58,6 +65,9 @@ final class AnimeItemTypeListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navigationItem.title = "Top Anime List"
+        navigationItem.backButtonDisplayMode = .generic
         
         collectionView.delegate = self
         
@@ -82,20 +92,23 @@ final class AnimeItemTypeListViewController: UIViewController {
             .store(in: &bag)
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        if let indexPath = collectionView.indexPathsForSelectedItems?.first {
+            collectionView.deselectItem(at: indexPath, animated: animated)
+        }
+    }
+    
     // MARK: - Private Methods
     
     private func makeDataSource() -> DataSource {
         
         let cellRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, Identifier> { cell, indexPath, identifier in
-            var content = cell.defaultContentConfiguration()
             
-            switch identifier {
-            case .animeItemType(let type):
-                content.text = type.rawValue.capitalized
-                
-            case .favorite:
-                content.text = "Favorite List"
-            }
+            var content = cell.defaultContentConfiguration()
+            content.text = identifier.title
+            
             cell.contentConfiguration = content
         }
         
@@ -116,6 +129,16 @@ extension AnimeItemTypeListViewController: UICollectionViewDelegate {
             case .favorite:
                 didSelectFavoriteHandler?(self)
             }
+        }
+    }
+}
+
+extension AnimeItemType {
+    
+    var title: String {
+        switch self {
+        case .anime: return "Top Anime"
+        case .manga: return "Top Manga"
         }
     }
 }

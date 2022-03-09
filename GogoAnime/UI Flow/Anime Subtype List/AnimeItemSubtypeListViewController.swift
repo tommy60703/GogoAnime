@@ -35,6 +35,13 @@ final class AnimeItemSubtypeListViewController: UIViewController {
     private enum Identifier: Hashable {
         case all
         case subtype(AnimeItemSubtype)
+        
+        var title: String {
+            switch self {
+            case .all: return "All"
+            case .subtype(let subtype): return subtype.title
+            }
+        }
     }
     
     private typealias DataSource = UICollectionViewDiffableDataSource<Section, Identifier>
@@ -55,6 +62,8 @@ final class AnimeItemSubtypeListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navigationItem.title = viewModel.type.navigationTitle
         
         collectionView.delegate = self
         
@@ -80,18 +89,23 @@ final class AnimeItemSubtypeListViewController: UIViewController {
             .store(in: &bag)
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        if let indexPath = collectionView.indexPathsForSelectedItems?.first {
+            collectionView.deselectItem(at: indexPath, animated: animated)
+        }
+    }
+    
     // MARK: - Private Methods
     
     private func makeDataSource() -> DataSource {
         
         let cellRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, Identifier> { cell, indexPath, identifier in
+            
             var content = cell.defaultContentConfiguration()
-            switch identifier {
-            case .all:
-                content.text = "All"
-            case .subtype(let subtype):
-                content.text = subtype.rawValue.capitalized
-            }
+            content.text = identifier.title
+            
             cell.contentConfiguration = content
         }
         
@@ -115,6 +129,52 @@ extension AnimeItemSubtypeListViewController: UICollectionViewDelegate {
             }()
             
             didSelectTypeHandler?(self, type, subtype)
+        }
+    }
+}
+
+private extension AnimeItemType {
+    
+    var navigationTitle: String {
+        switch self {
+        case .anime: return "Top Anime"
+        case .manga: return "Top Manga"
+        }
+    }
+}
+
+extension AnimeItemSubtype {
+    
+    var title: String {
+        switch self {
+        case .airing:
+            return "Top Airing"
+        case .upcoming:
+            return "Top Upcoming"
+        case .tv:
+            return "Top TV Series"
+        case .movie:
+            return "Top Movies"
+        case .ova:
+            return "Top OVAs"
+        case .special:
+            return "Top Specials"
+        case .manga:
+            return "Top Manga"
+        case .novels:
+            return "Top Light Novels"
+        case .oneshots:
+            return "Top One-shots"
+        case .doujin:
+            return "Top Doujinshi"
+        case .manhwa:
+            return "Top Manhwa"
+        case .manhua:
+            return "Top Manhua"
+        case .bypopularity:
+            return "Most Popular"
+        case .favorite:
+            return "Most Favorited"
         }
     }
 }

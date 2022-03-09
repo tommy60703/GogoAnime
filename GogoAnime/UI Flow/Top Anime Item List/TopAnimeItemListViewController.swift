@@ -56,6 +56,8 @@ final class TopAnimeItemListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
                 
+        navigationItem.title = viewModel.subtype?.title ?? viewModel.type.title
+        
         collectionView.refreshControl = refreshControl
         collectionView.delegate = self
         
