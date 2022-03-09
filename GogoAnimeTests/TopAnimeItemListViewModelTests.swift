@@ -120,7 +120,7 @@ class TopAnimeItemListViewModelTests: XCTestCase {
         // Assert
         XCTAssertEqual(useCase.pageRecords, [1, 2, 3, 1])
                 
-        XCTAssertEqual(viewModel.animeItems?.map(\.id), [1])
+        XCTAssertEqual(viewModel.animeItems.map(\.id), [1])
         XCTAssertEqual(viewModel.currentPage, 1)
     }
     

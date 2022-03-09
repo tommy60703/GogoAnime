@@ -44,7 +44,7 @@ final class TopAnimeItemListViewModel {
     
     @Published private(set) var reloadState: ViewModelState = .idle
     @Published private(set) var loadMoreState: ViewModelState = .idle
-    @Published private(set) var animeItems: [AnimeItem]?
+    @Published private(set) var animeItems: [AnimeItem] = []
     @Published private(set) var currentPage: Int = 1
     
     let animeItemDidUpdate = PassthroughSubject<AnimeItem.ID, Never>()
@@ -65,10 +65,10 @@ final class TopAnimeItemListViewModel {
         do {
             let updated = try await useCase.addToFavorites(animeItem)
             
-            let index = animeItems?.firstIndex { $0.id == animeItem.id }
+            let index = animeItems.firstIndex { $0.id == animeItem.id }
             
             if let index = index {
-                animeItems?[index] = updated
+                animeItems[index] = updated
                 animeItemDidUpdate.send(animeItem.id)
             }
         } catch {
@@ -80,10 +80,10 @@ final class TopAnimeItemListViewModel {
         do {
             let updated = try await useCase.removeFromFavorites(animeItem)
             
-            let index = animeItems?.firstIndex { $0.id == animeItem.id }
+            let index = animeItems.firstIndex { $0.id == animeItem.id }
             
             if let index = index {
-                animeItems?[index] = updated
+                animeItems[index] = updated
                 animeItemDidUpdate.send(animeItem.id)
             }
         } catch {
@@ -122,11 +122,8 @@ final class TopAnimeItemListViewModel {
                 return
             }
             
-            if let animeItems = animeItems {
-                self.animeItems = animeItems + newItems
-            } else {
-                self.animeItems = newItems
-            }
+            self.animeItems += newItems
+            
             currentPage += 1
             loadMoreState = .idle
             

@@ -25,6 +25,8 @@ final class TopAnimeItemListViewController: UIViewController {
         return UICollectionView(frame: .zero, collectionViewLayout: layout)
     }()
     
+    private let loadingIndicator = UIActivityIndicatorView()
+    
     private lazy var refreshControl = UIRefreshControl(frame: .zero, primaryAction: UIAction { _ in
         Task {
             await self.viewModel.reload()
@@ -57,11 +59,12 @@ final class TopAnimeItemListViewController: UIViewController {
         collectionView.refreshControl = refreshControl
         collectionView.delegate = self
         
-        view.addSubview(collectionView)
-        
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        view.addAutoLayoutSubviews([collectionView, loadingIndicator])
         
         NSLayoutConstraint.activate([
+            loadingIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            loadingIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            
             collectionView.topAnchor.constraint(equalTo: view.topAnchor),
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
@@ -74,7 +77,7 @@ final class TopAnimeItemListViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        if viewModel.animeItems == nil {
+        if viewModel.animeItems.isEmpty {
             Task {
                 await viewModel.reload()
             }
@@ -84,6 +87,19 @@ final class TopAnimeItemListViewController: UIViewController {
     // MARK: - Private Methods
     
     private func bindViewModel() {
+        
+        viewModel.$reloadState.combineLatest(viewModel.$animeItems)
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] state, items in
+                if state.isLoading && items.isEmpty {
+                    self?.loadingIndicator.isHidden = false
+                    self?.loadingIndicator.startAnimating()
+                } else {
+                    self?.loadingIndicator.stopAnimating()
+                }
+            }
+            .store(in: &bag)
+        
         viewModel.$reloadState
             .receive(on: DispatchQueue.main)
             .sink { [weak self] state in
@@ -96,13 +112,11 @@ final class TopAnimeItemListViewController: UIViewController {
         viewModel.$animeItems
             .receive(on: DispatchQueue.main)
             .sink { [weak self] animeItems in
-                if let animeItems = animeItems {
-                    var snapshot = Snapshot()
-                    snapshot.appendSections([.top])
-                    snapshot.appendItems(animeItems.map(\.id), toSection: .top)
+                var snapshot = Snapshot()
+                snapshot.appendSections([.top])
+                snapshot.appendItems(animeItems.map(\.id), toSection: .top)
 
-                    self?.dataSource.apply(snapshot)
-                }
+                self?.dataSource.apply(snapshot)
             }
             .store(in: &bag)
         
@@ -121,9 +135,7 @@ final class TopAnimeItemListViewController: UIViewController {
          
         let cellRegistration = UICollectionView.CellRegistration<UICollectionViewCell, AnimeItem.ID> { [unowned self] cell, indexPath, identifier in
             
-            guard let item = self.viewModel.animeItems?[indexPath.item] else {
-                return
-            }
+            let item = self.viewModel.animeItems[indexPath.item]
             
             var content = AnimeItemConfiguration(
                 imageURL: item.imageURL,
@@ -167,7 +179,7 @@ extension TopAnimeItemListViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        guard let url = viewModel.animeItems?[indexPath.item].url else {
+        guard let url = viewModel.animeItems[indexPath.item].url else {
             return
         }
         
