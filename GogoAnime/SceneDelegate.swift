@@ -22,6 +22,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         coordinator.start()
         
         window = UIWindow(windowScene: windowScene)
+        window?.tintColor = .systemPink
         window?.rootViewController = coordinator.navigationController
         window?.makeKeyAndVisible()
     }

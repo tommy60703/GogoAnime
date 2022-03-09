@@ -42,7 +42,7 @@ final class AnimeItemView: UIView, UIContentView {
         
         titleLabel.numberOfLines = 0
         titleLabel.font = .preferredFont(forTextStyle: .headline)
-        titleLabel.textColor = .systemPink
+        titleLabel.textColor = tintColor
         
         typeLabel.font = .preferredFont(forTextStyle: .caption1)
         typeLabel.textColor = .secondaryLabel
@@ -50,7 +50,6 @@ final class AnimeItemView: UIView, UIContentView {
         dateLabel.font = .preferredFont(forTextStyle: .caption1)
         dateLabel.textColor = .secondaryLabel
         
-        addToFavoriteButton.tintColor = .systemPink
         addToFavoriteButton.setImage(UIImage(systemName: "heart"), for: .normal)
         addToFavoriteButton.setImage(UIImage(systemName: "heart.fill"), for: .selected)
         addToFavoriteButton.setImage(UIImage(systemName: "heart.fill"), for: [.selected, .highlighted])
@@ -92,6 +91,11 @@ final class AnimeItemView: UIView, UIContentView {
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func tintColorDidChange() {
+        super.tintColorDidChange()
+        titleLabel.textColor = tintColor
     }
     
     func configure(configuration: UIContentConfiguration) {
