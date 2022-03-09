@@ -43,6 +43,7 @@
 		65D412AC27D4773500918850 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65D412AA27D4773500918850 /* Main.storyboard */; };
 		65D412AE27D4773600918850 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65D412AD27D4773600918850 /* Assets.xcassets */; };
 		65D412B127D4773600918850 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65D412AF27D4773600918850 /* LaunchScreen.storyboard */; };
+		65F687C627D8E892008F0F0D /* FavoriteListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F687C527D8E892008F0F0D /* FavoriteListViewModelTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -94,6 +95,7 @@
 		65D412AD27D4773600918850 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		65D412B027D4773600918850 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		65D412B227D4773600918850 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		65F687C527D8E892008F0F0D /* FavoriteListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteListViewModelTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -259,6 +261,7 @@
 				6522E31F27D65C7E00E4DB27 /* EndpointTests.swift */,
 				6522E32927D78E5900E4DB27 /* AppAnimeItemTests */,
 				6522E32F27D7AF5100E4DB27 /* TopAnimeItemListViewModelTests.swift */,
+				65F687C527D8E892008F0F0D /* FavoriteListViewModelTests.swift */,
 				6522E32A27D793D700E4DB27 /* XCTTest+Async.swift */,
 			);
 			path = GogoAnimeTests;
@@ -420,6 +423,7 @@
 			files = (
 				6522E32227D6661200E4DB27 /* AppAnimeItemUseCaseSpyTests.swift in Sources */,
 				6522E32027D65C7E00E4DB27 /* EndpointTests.swift in Sources */,
+				65F687C627D8E892008F0F0D /* FavoriteListViewModelTests.swift in Sources */,
 				6522E32D27D79A4900E4DB27 /* AppAnimeItemUseCaseFavoriteTests.swift in Sources */,
 				6522E32B27D793D700E4DB27 /* XCTTest+Async.swift in Sources */,
 				6522E33027D7AF5100E4DB27 /* TopAnimeItemListViewModelTests.swift in Sources */,
