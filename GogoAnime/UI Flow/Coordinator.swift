@@ -5,6 +5,7 @@
 //  Created by Tommy Lin on 2022/3/7.
 //
 
+import SafariServices
 import UIKit
 
 final class AppCoordinator {
@@ -46,6 +47,11 @@ final class AppCoordinator {
         let useCase = useCaseFactory.makeAnimeItemUseCase()
         let viewModel = TopAnimeItemListViewModel(useCase: useCase, type: animeItemType, subtype: subtype)
         let viewController = TopAnimeItemListViewController(viewModel: viewModel)
+        viewController.didSelectAnimeItemHandler = { [unowned self] _, animeItem in
+            if let url = animeItem.url {
+                presentAnimeItemDetail(url: url)
+            }
+        }
         
         navigationController.pushViewController(viewController, animated: animated)
     }
@@ -54,7 +60,17 @@ final class AppCoordinator {
         let useCase = useCaseFactory.makeAnimeItemUseCase()
         let viewModel = FavoriteListViewModel(useCase: useCase)
         let viewController = FavoriteListViewController(viewModel: viewModel)
+        viewController.didSelectAnimeItemHandler = { [unowned self] _, animeItem in
+            if let url = animeItem.url {
+                presentAnimeItemDetail(url: url)
+            }
+        }
         
         navigationController.pushViewController(viewController, animated: animated)
+    }
+    
+    func presentAnimeItemDetail(url: URL, animated: Bool = true) {
+        let safari = SFSafariViewController(url: url)
+        navigationController.present(safari, animated: animated, completion: nil)
     }
 }

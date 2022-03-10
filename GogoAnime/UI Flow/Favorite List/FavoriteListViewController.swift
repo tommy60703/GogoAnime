@@ -12,6 +12,10 @@ final class FavoriteListViewController: UIViewController {
     
     // MARK: - Data
     
+    typealias DidSelectAnimeItemHandler = (FavoriteListViewController, AnimeItem) -> Void
+    
+    var didSelectAnimeItemHandler: DidSelectAnimeItemHandler?
+    
     let viewModel: FavoriteListViewModel
     
     private var bag = [AnyCancellable]()
@@ -70,6 +74,7 @@ final class FavoriteListViewController: UIViewController {
         
         view.addSubview(collectionView)
         
+        collectionView.delegate = self
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
@@ -130,5 +135,12 @@ final class FavoriteListViewController: UIViewController {
         return DataSource(collectionView: collectionView) { collectionView, indexPath, item in
             collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: item)
         }
+    }
+}
+
+extension FavoriteListViewController: UICollectionViewDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        didSelectAnimeItemHandler?(self, viewModel.animeItems[indexPath.item])
     }
 }

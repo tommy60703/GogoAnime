@@ -6,12 +6,15 @@
 //
 
 import Combine
-import SafariServices
 import UIKit
 
 final class TopAnimeItemListViewController: UIViewController {
     
     // MARK: - Data
+    
+    typealias DidSelectAnimeItemHandler = (TopAnimeItemListViewController, AnimeItem) -> Void
+    
+    var didSelectAnimeItemHandler: DidSelectAnimeItemHandler?
     
     private let viewModel: TopAnimeItemListViewModel
     
@@ -180,14 +183,7 @@ extension TopAnimeItemListViewController: UICollectionViewDelegate {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-        guard let url = viewModel.animeItems[indexPath.item].url else {
-            return
-        }
-        
-        // TODO: use coordinator
-        let safari = SFSafariViewController(url: url)
-        present(safari, animated: true, completion: nil)
+        didSelectAnimeItemHandler?(self, viewModel.animeItems[indexPath.item])
     }
 }
 
